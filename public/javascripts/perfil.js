@@ -40,7 +40,7 @@ async function carregarMinhasReceitas() {
         const receitas = await resposta.json();
 
         if (resposta.ok) {
-            exibirReceitas(receitas);
+            exibirReceitas(receitas, true); // true for minhas receitas
         } else {
             console.error('Erro ao carregar receitas:', receitas.erro);
         }
@@ -58,7 +58,7 @@ async function carregarReceitasCurtidas() {
         const receitas = await resposta.json();
 
         if (resposta.ok) {
-            exibirReceitas(receitas);
+            exibirReceitas(receitas, false); // false for curtidas
         } else {
             console.error('Erro ao carregar receitas curtidas:', receitas.erro);
         }
@@ -68,7 +68,7 @@ async function carregarReceitasCurtidas() {
 }
 
 // Exibir Receitas
-function exibirReceitas(receitas) {
+function exibirReceitas(receitas, isMinhas = false) {
     const grid = document.getElementById('grid-receitas');
 
     if (receitas.length === 0) {
@@ -83,6 +83,23 @@ function exibirReceitas(receitas) {
         const card = document.createElement('div');
         card.className = 'card-receita';
 
+        let acoesHTML = `
+            <button class="btn-like" data-id="${receita._id}">
+                <i class="fa-solid fa-heart"></i> <span class="likes-count">${receita.likes ? receita.likes.length : 0}</span>
+            </button>
+        `;
+
+        if (isMinhas) {
+            acoesHTML += `
+                <button class="btn-edit" data-id="${receita._id}">
+                    <i class="fa-solid fa-edit"></i>
+                </button>
+                <button class="btn-delete" data-id="${receita._id}">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            `;
+        }
+
         card.innerHTML = `
             <img src="${receita.foto || 'images/placeholder.jpg'}" alt="${receita.titulo}" class="foto-receita">
             <div class="info-receita">
@@ -95,9 +112,7 @@ function exibirReceitas(receitas) {
                     <strong>Instruções:</strong> ${receita.instrucoes}
                 </div>
                 <div class="acoes-receita">
-                    <button class="btn-like" data-id="${receita._id}">
-                        <i class="fa-solid fa-heart"></i> <span class="likes-count">${receita.likes ? receita.likes.length : 0}</span>
-                    </button>
+                    ${acoesHTML}
                 </div>
             </div>
         `;
@@ -105,6 +120,16 @@ function exibirReceitas(receitas) {
         // Adicionar evento ao botão de like
         const btnLike = card.querySelector('.btn-like');
         btnLike.addEventListener('click', () => toggleLike(receita._id, btnLike));
+
+        if (isMinhas) {
+            // Adicionar evento ao botão de edit
+            const btnEdit = card.querySelector('.btn-edit');
+            btnEdit.addEventListener('click', () => editarReceita(receita._id));
+
+            // Adicionar evento ao botão de delete
+            const btnDelete = card.querySelector('.btn-delete');
+            btnDelete.addEventListener('click', () => deletarReceita(receita._id));
+        }
 
         grid.appendChild(card);
     });
@@ -162,6 +187,35 @@ async function toggleLike(receitaId, btn) {
         }
     } catch (erro) {
         console.error('Erro:', erro);
+    }
+}
+
+// Editar Receita
+function editarReceita(receitaId) {
+    // Redirecionar para a página de criação de receita com o ID para edição
+    window.location.href = `criar-receita.html?edit=${receitaId}`;
+}
+
+// Deletar Receita
+async function deletarReceita(receitaId) {
+    if (!confirm('Tem certeza que deseja deletar esta receita?')) {
+        return;
+    }
+
+    try {
+        const resposta = await fetch(`/api/receitas/${receitaId}`, {
+            method: 'DELETE'
+        });
+
+        if (resposta.ok) {
+            alert('Receita deletada com sucesso!');
+            carregarMinhasReceitas(); // Recarregar as receitas
+        } else {
+            alert('Erro ao deletar receita.');
+        }
+    } catch (erro) {
+        console.error('Erro:', erro);
+        alert('Erro ao deletar receita.');
     }
 }
 

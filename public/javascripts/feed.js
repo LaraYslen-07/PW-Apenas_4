@@ -39,12 +39,6 @@ function exibirReceitas(receitas) {
             <div class="info-receita">
                 <h3>${receita.titulo}</h3>
                 <p>${receita.descricao}</p>
-                <div class="ingredientes">
-                    <strong>Ingredientes:</strong> ${receita.ingredientes}
-                </div>
-                <div class="instrucoes">
-                    <strong>Instruções:</strong> ${receita.instrucoes}
-                </div>
                 <div class="acoes-receita">
                     <button class="btn-like" data-id="${receita._id}">
                         <i class="fa-solid fa-heart"></i> <span class="likes-count">${receita.likes ? receita.likes.length : 0}</span>
@@ -52,6 +46,13 @@ function exibirReceitas(receitas) {
                 </div>
             </div>
         `;
+
+        // Adicionar evento ao card para abrir modal
+        card.addEventListener('click', (e) => {
+            if (!e.target.closest('.btn-like')) {
+                abrirModal(receita);
+            }
+        });
 
         // Adicionar evento ao botão de like
         const btnLike = card.querySelector('.btn-like');
@@ -111,6 +112,35 @@ async function toggleLike(receitaId, btn) {
     } catch (erro) {
         console.error('Erro:', erro);
     }
+}
+
+// Abrir Modal com Detalhes da Receita
+function abrirModal(receita) {
+    const modal = document.getElementById('modal-receita');
+    const modalBody = document.getElementById('modal-body');
+
+    modalBody.innerHTML = `
+        <img src="${receita.foto || 'images/placeholder.jpg'}" alt="${receita.titulo}" style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
+        <h2>${receita.titulo}</h2>
+        <p><strong>Descrição:</strong> ${receita.descricao}</p>
+        <p><strong>Ingredientes:</strong> ${receita.ingredientes}</p>
+        <p><strong>Instruções:</strong> ${receita.instrucoes}</p>
+        <p><strong>Categoria:</strong> ${receita.categoria}</p>
+        <p><strong>Curtidas:</strong> ${receita.likes ? receita.likes.length : 0}</p>
+    `;
+
+    modal.style.display = 'block';
+
+    // Fechar modal
+    document.querySelector('.close-modal').onclick = () => {
+        modal.style.display = 'none';
+    };
+
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    };
 }
 
 // Carregar Foto de Perfil na Navbar

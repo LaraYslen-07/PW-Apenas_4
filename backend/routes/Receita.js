@@ -12,10 +12,19 @@ router.post('/', upload.single('foto'), receitaController.criarReceita);
 // Rota: GET /api/receitas (Lista todas)
 router.get('/', receitaController.listarReceitas);
 
+// Rota: GET /api/receitas/:id (Buscar receita por ID)
+router.get('/:id', receitaController.buscarReceitaPorId);
+
 // Rota: GET /api/receitas/curtidas/:id (Lista receitas curtidas por usuário)
 router.get('/curtidas/:id', receitaController.listarReceitasCurtidas);
 
 // Rota: POST /api/receitas/:id/like (Curtir/Descurtir)
 router.post('/:id/like', receitaController.toggleLike);
+
+// Rota: DELETE /api/receitas/:id (Deletar receita)
+router.delete('/:id', receitaController.deletarReceita);
+
+// Rota: PUT /api/receitas/:id (Atualizar receita)
+router.put('/:id', upload.single('foto'), receitaController.atualizarReceita);
 
 module.exports = router;

@@ -854,6 +854,76 @@ body.pagina-feed {
 }
 
 /* =========================================
+   PERFIL DO USUÁRIO
+   ========================================= */
+.perfil-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.perfil-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.foto-perfil-grande {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ff7043;
+    flex-shrink: 0;
+    margin-top: 5px;
+}
+
+.info-perfil {
+    flex: 1;
+}
+
+.info-perfil h1 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+    color: #333;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.info-perfil p {
+    margin: 4px 0;
+    color: #666;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.info-perfil #email-usuario {
+    color: #888;
+    font-size: 16px;
+}
+
+.botao-largo {
+    background: #ff7043;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: background 0.3s;
+}
+
+.botao-largo:hover {
+    background: #e55a2b;
+}
+
+/* =========================================
    ABAS DO PERFIL
    ========================================= */
 .tabs-perfil {
@@ -901,4 +971,175 @@ body.pagina-feed {
 
 .foto-perfil-nav:hover {
     border-color: #e55a2b;
+}
+
+/* =========================================
+   CARDS DE RECEITAS
+   ========================================= */
+.card-receita {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 300px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 10px;
+}
+
+.card-receita:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.foto-receita {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.info-receita {
+    padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-receita h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.info-receita p {
+    margin: 0 0 10px 0;
+    color: #666;
+    font-size: 14px;
+    flex: 1;
+}
+
+.acoes-receita {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.btn-like {
+    background: none;
+    border: none;
+    color: #ff7043;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-like:hover {
+    color: #e55a2b;
+}
+
+.btn-edit {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-edit:hover {
+    background: #e7f3ff;
+}
+
+.btn-delete {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-delete:hover {
+    background: #f8d7da;
+}
+
+.likes-count {
+    font-weight: bold;
+}
+
+/* Ícones de editar e deletar no perfil */
+.icones-perfil {
+    display: flex;
+    gap: 10px;
+}
+
+.icones-perfil button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-editar {
+    color: #007bff;
+}
+
+.btn-editar:hover {
+    background: #e7f3ff;
+}
+
+.btn-deletar {
+    color: #dc3545;
+}
+
+.btn-deletar:hover {
+    background: #f8d7da;
+}
+
+/* =========================================
+   MODAL DE DETALHES
+   ========================================= */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: black;
 }

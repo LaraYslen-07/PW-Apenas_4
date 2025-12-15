@@ -4,6 +4,11 @@ const imgPreview = document.getElementById('preview-receita');
 const textoUpload = document.querySelector('.area-upload span');
 const iconeUpload = document.querySelector('.area-upload i');
 
+// Verificar se é edição
+const urlParams = new URLSearchParams(window.location.search);
+const isEdit = urlParams.has('edit');
+const editId = urlParams.get('edit');
+
 inputFoto.addEventListener('change', function(e) {
     const file = e.target.files[0];
     
@@ -22,6 +27,52 @@ inputFoto.addEventListener('change', function(e) {
         reader.readAsDataURL(file);
     }
 });
+
+// Carregar dados da receita para edição
+async function carregarReceitaParaEdicao() {
+    if (!isEdit || !editId) return;
+
+    try {
+        const resposta = await fetch(`/api/receitas/${editId}`);
+        const receita = await resposta.json();
+
+        if (resposta.ok) {
+            // Preencher os campos
+            document.getElementById('titulo').value = receita.titulo;
+            document.getElementById('descricao').value = receita.descricao;
+            document.getElementById('instrucoes').value = receita.instrucoes;
+
+            // Preencher ingredientes (assumindo que são separados por vírgula)
+            const ingredientes = receita.ingredientes.split(', ');
+            if (ingredientes.length > 0) document.getElementById('ingrediente1').value = ingredientes[0];
+            if (ingredientes.length > 1) document.getElementById('ingrediente2').value = ingredientes[1];
+            if (ingredientes.length > 2) document.getElementById('ingrediente3').value = ingredientes[2];
+            if (ingredientes.length > 3) document.getElementById('ingrediente4').value = ingredientes[3];
+
+            // Selecionar categoria
+            const categoriaRadio = document.querySelector(`input[name="categoria"][value="${receita.categoria}"]`);
+            if (categoriaRadio) categoriaRadio.checked = true;
+
+            // Mostrar foto atual
+            if (receita.foto) {
+                imgPreview.src = receita.foto;
+                imgPreview.style.display = 'block';
+                textoUpload.style.display = 'none';
+                iconeUpload.style.display = 'none';
+            }
+
+            // Mudar título da página
+            document.querySelector('h1').textContent = 'Editar Receita';
+            document.querySelector('button[type="submit"]').textContent = 'Atualizar Receita';
+        } else {
+            alert('Erro ao carregar receita para edição.');
+            window.location.href = 'perfil.html';
+        }
+    } catch (erro) {
+        console.error('Erro:', erro);
+        alert('Erro ao carregar receita.');
+    }
+}
 
 // Envio do formulário (Conectado ao Backend)
 document.getElementById('form-receita').addEventListener('submit', async (e) => {
@@ -67,16 +118,16 @@ document.getElementById('form-receita').addEventListener('submit', async (e) => 
         botao.disabled = true;
 
         // Enviar para o servidor
-        const resposta = await fetch('/api/receitas', {
-            method: 'POST',
+        const resposta = await fetch(isEdit ? `/api/receitas/${editId}` : '/api/receitas', {
+            method: isEdit ? 'PUT' : 'POST',
             body: formData
         });
 
         const resultado = await resposta.json();
 
         if (resposta.ok) {
-            alert('Receita criada com sucesso!');
-            window.location.href = 'feed.html'; // Redireciona para o Feed
+            alert(isEdit ? 'Receita atualizada com sucesso!' : 'Receita criada com sucesso!');
+            window.location.href = 'perfil.html'; // Redireciona para o Perfil
         } else {
             alert('Erro ao criar receita: ' + (resultado.erro || 'Erro desconhecido'));
         }
@@ -87,7 +138,12 @@ document.getElementById('form-receita').addEventListener('submit', async (e) => 
     } finally {
         // Volta o botão ao normal
         const botao = document.querySelector('button[type="submit"]');
-        botao.innerText = "Criar Receita";
+        botao.innerText = isEdit ? "Atualizar Receita" : "Criar Receita";
         botao.disabled = false;
     }
+});
+
+// Carregar quando a página carregar
+document.addEventListener('DOMContentLoaded', () => {
+    carregarReceitaParaEdicao();
 });

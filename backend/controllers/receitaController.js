@@ -49,6 +49,20 @@ exports.listarReceitas = async (req, res) => {
     }
 };
 
+// 3. Buscar Receita por ID
+exports.buscarReceitaPorId = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const receita = await Receita.findById(id);
+        if (!receita) {
+            return res.status(404).json({ erro: 'Receita não encontrada.' });
+        }
+        res.status(200).json(receita);
+    } catch (error) {
+        res.status(500).json({ erro: 'Erro ao buscar receita.' });
+    }
+};
+
 // 4. Listar Receitas Curtidas por Usuário
 exports.listarReceitasCurtidas = async (req, res) => {
     try {
@@ -88,5 +102,40 @@ exports.toggleLike = async (req, res) => {
         res.status(200).json({ likes: receita.likes.length });
     } catch (error) {
         res.status(500).json({ erro: 'Erro ao curtir receita.' });
+    }
+};
+
+// 5. Deletar Receita
+exports.deletarReceita = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const receita = await Receita.findByIdAndDelete(id);
+        if (!receita) {
+            return res.status(404).json({ erro: 'Receita não encontrada.' });
+        }
+        res.status(200).json({ mensagem: 'Receita deletada com sucesso.' });
+    } catch (error) {
+        res.status(500).json({ erro: 'Erro ao deletar receita.' });
+    }
+};
+
+// 6. Atualizar Receita
+exports.atualizarReceita = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { titulo, descricao, ingredientes, instrucoes, categoria } = req.body;
+
+        const updateData = { titulo, descricao, ingredientes, instrucoes, categoria };
+        if (req.file) {
+            updateData.foto = req.file.path; // Nova foto se enviada
+        }
+
+        const receita = await Receita.findByIdAndUpdate(id, updateData, { new: true });
+        if (!receita) {
+            return res.status(404).json({ erro: 'Receita não encontrada.' });
+        }
+        res.status(200).json({ mensagem: 'Receita atualizada com sucesso.', dados: receita });
+    } catch (error) {
+        res.status(500).json({ erro: 'Erro ao atualizar receita.' });
     }
 };
