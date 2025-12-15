@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Receita - Apenas 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Kalam:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Apenas 4 🍳</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="feed.html" class="nav-link">Cancelar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="caderno">
+        <div class="espiral"></div>
+
+        <!-- Classe "modo-centralizado" para focar no formulário -->
+        <div class="folha modo-centralizado" style="max-width: 800px; width: 100%;">
+            
+            <div class="form-header">
+                <h1>Nova Receita</h1>
+                <p>O segredo está na simplicidade.</p>
+            </div>
+
+            <form id="form-receita" class="formulario-estilo" style="max-width: 600px;">
+                
+                <!-- 1. FOTO DO PRATO (Grande destaque) -->
+                <div class="upload-receita-container">
+                    <label for="foto-receita" class="area-upload">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Clique para adicionar uma foto deliciosa</span>
+                        <img id="preview-receita" src="" style="display: none;">
+                    </label>
+                    <input type="file" id="foto-receita" accept="image/*" style="display: none;">
+                </div>
+
+                <!-- 2. NOME DA RECEITA -->
+                <div class="input-group">
+                    <label>Nome do Prato</label>
+                    <div class="input-box">
+                        <input type="text" class="input-titulo" placeholder="Ex: Macarrão com Queijo" required>
+                    </div>
+                </div>
+
+                <!-- 3. OS 4 INGREDIENTES (Destaque do Site) -->
+                <div class="secao-ingredientes">
+                    <h3><i class="fa-solid fa-basket-shopping"></i> Os 4 Ingredientes</h3>
+                    <div class="grid-ingredientes">
+                        <input type="text" placeholder="1. Ingrediente Principal" required>
+                        <input type="text" placeholder="2. Segundo item" required>
+                        <input type="text" placeholder="3. Terceiro item" required>
+                        <input type="text" placeholder="4. Toque final" required>
+                    </div>
+                </div>
+
+                <!-- 4. MODO DE PREPARO -->
+                <div class="input-group">
+                    <label>Modo de Preparo</label>
+                    <div class="input-box">
+                        <textarea rows="5" placeholder="Conte como faz essa mágica acontecer..."></textarea>
+                    </div>
+                </div>
+
+                <!-- 5. CATEGORIA (Tags) -->
+                <div class="input-group">
+                    <label>Categoria</label>
+                    <div class="opcoes-categoria">
+                        <label class="radio-tag">
+                            <input type="radio" name="categoria" value="salgado" checked>
+                            <span>🍕 Salgado</span>
+                        </label>
+                        <label class="radio-tag">
+                            <input type="radio" name="categoria" value="doce">
+                            <span>🍩 Doce</span>
+                        </label>
+                        <label class="radio-tag">
+                            <input type="radio" name="categoria" value="saudavel">
+                            <span>🥗 Saudável</span>
+                        </label>
+                        <label class="radio-tag">
+                            <input type="radio" name="categoria" value="bebida">
+                            <span>🍹 Bebida</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="botao-largo">Publicar Receita</button>
+            </form>
+
+        </div>
+    </div>
+
+    <script src="javascripts/criar-receita.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar - Apenas 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Apenas 4 🍳</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Início</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="caderno">
+        <div class="espiral"></div>
+        <div class="folha modo-centralizado">
+            
+            <div class="form-header">
+                <h1>Bem-vindo de volta!</h1>
+                <p>A cozinha estava esperando por você.</p>
+            </div>
+
+            <form id="form-login" class="formulario-estilo">
+                
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="email" placeholder="seu@email.com" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="senha" placeholder="Sua senha" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="botao-largo">Entrar na Cozinha</button>
+            </form>
+
+            <p class="rodape-form">
+                Ainda não tem conta? <a href="cadastro.html">Cadastrar</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="javascripts/login.js"></script>
+</body>
+</html>

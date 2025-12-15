@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorar Receitas - Apenas 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet"> <!-- Fonte pra Post-it -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="pagina-feed"> <!-- Classe especial pra mudar o body -->
+
+    <!-- NAVBAR (Fica Fixa no Topo) -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Apenas 4 🍳</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Voltar para página inicial</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="cadastro.html" class="btn-entrar">Meu Perfil</a>
+                <!-- Botão Flutuante de Adicionar -->
+                <a href="criar-receita.html" class="btn-adicionar-receita">
+                    <i class="fa-solid fa-plus"></i> Nova Receita
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ÁREA DA MESA (Onde tudo acontece) -->
+    <main class="mesa-container">
+        
+        <!-- BARRA LATERAL (Post-its de Filtros) -->
+        <aside class="sidebar-filtros">
+            <div class="postit amarelo">
+                <h3><i class="fa-solid fa-filter"></i> Filtrar</h3>
+                <ul>
+                    <li><a href="#" class="ativo">Tudo</a></li>
+                    <li><a href="#">Salgados 🍕</a></li>
+                    <li><a href="#">Doces 🍩</a></li>
+                    <li><a href="#">Saudável 🥗</a></li>
+                    <li><a href="#">Bebidas 🍹</a></li>
+                </ul>
+            </div>
+
+            <div class="postit rosa">
+                <h3>💡 Dica do Chef</h3>
+                <p>Tente usar sobras da geladeira hoje!</p>
+            </div>
+        </aside>
+
+        <!-- ÁREA CENTRAL (Grid de Receitas) -->
+        <section class="feed-grid">
+            
+            <!-- Título Flutuante -->
+            <div class="titulo-feed">
+                <h1>O que temos pra hoje?</h1>
+            </div>
+
+            <!-- ESTADO VAZIO (Ficha de Papel no meio da mesa) -->
+            <div class="ficha-receita-vazia">
+                <div class="furo-papel"></div>
+                <h2>A mesa está vazia! 🍽️</h2>
+                <p>Nenhuma receita foi colocada na mesa ainda.</p>
+                <p>Seja o primeiro chef a compartilhar.</p>
+                <button class="botao-largo" style="margin-top: 20px;">
+                    criar primeira Receita
+                </button>
+            </div>
+
+            <!-- (Futuramente aqui entrarão os Cards das receitas) -->
+
+        </section>
+
+    </main>
+
+    <script src="javascripts/feed.js"></script>
+</body>
+</html>

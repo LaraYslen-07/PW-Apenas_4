@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receitas 4 Ingredientes</title>
+    <!-- Fonte Lettering -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+    <!-- 1. BARRA DE NAVEGAÇÃO -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Apenas 4 🍳</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Início</a></li>
+                <li class="nav-item"><a href="feed.html" class="nav-link">Receitas</a></li>
+                <li class="nav-item"><a href="#sobre" class="nav-link">Sobre</a></li>
+                <li class="nav-item"><a href="#contato" class="nav-link">Contato</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="login.html" class="btn-entrar">Entrar</a>
+                <a href="cadastro.html" class="btn-cadastrar">Cadastrar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. CADERNO (CONTEÚDO PRINCIPAL) -->
+    <div class="caderno">
+        
+        <!-- Lado Esquerdo: Espiral -->
+        <div class="espiral"></div>
+
+        <!-- Lado Direito: Folha de Papel -->
+        <div class="folha">
+            
+            <!-- Conteúdo Principal -->
+            <!-- DENTRO DA .folha -->
+
+<div class="hero-titulo">
+    <!-- Ícone Colher (Esquerda) -->
+     
+    
+    <h1>Bem-vindo ao <br>      Apenas 4</h1>
+    
+    <!-- Ícone Chapéu de Chef (Direita) -->
+    <!-- Tente fa-utensils (garfo e faca cruzados) se o chapéu falhar -->
+ <img src="images/chapeu.png" class="icone-flutuante chapeu" alt="Chapéu">
+
+    <!-- Obs: Se o ícone 'hat-chef' não aparecer na versão free, usaremos 'fa-cookie-bite' ou outro similar -->
+</div>
+
+            <p>Menos ingredientes, mais sabor.</p>
+            <p>Aqui você encontra e compartilha receitas incríveis usando apenas 4 itens.</p>
+            <p>Nossa missão é descomplicar a cozinha.</p>
+            
+            
+            <a href="feed.html" class="botao-entrar">Ver Receitas</a>
+
+            <!-- Linha de Separação (Opcional, pra ficar bonito) -->
+            <hr style="margin: 40px 0; border: 0; border-top: 2px dashed #e0d0b0;">
+
+            <!-- SEÇÃO DE PASSOS (AGORA DENTRO DA FOLHA) -->
+            <div class="passo-a-passo">
+                <h2>Modo de uso</h2>
+                
+                <div class="timeline">
+                    <!-- Linha que enche -->
+                    <div class="linha-progresso"></div>
+                    
+                    <!-- Passo 1 -->
+                    <div class="timeline-item">
+                        <div class="bolinha ativo">1</div>
+                        <div class="conteudo">
+                            <h3>Escolha 4 Ingredientes</h3>
+                            <p>Abra a geladeira e pegue o que tiver.</p>
+                        </div>
+                    </div>
+
+                    <!-- Passo 2 -->
+                    <div class="timeline-item">
+                        <div class="bolinha">2</div>
+                        <div class="conteudo">
+                            <h3>Envie a Foto</h3>
+                            <p>Mostre pro mundo sua obra-prima culinária.</p>
+                        </div>
+                    </div>
+
+                    <!-- Passo 3 -->
+                    <div class="timeline-item">
+                        <div class="bolinha">3</div>
+                        <div class="conteudo">
+                            <h3>Receba Elogios!</h3>
+                            <p>Veja a comunidade curtir e avaliar.</p>
+                        </div>
+                    </div>
+                </div> <!-- Fim da Timeline -->
+            </div> <!-- Fim do Passo a Passo -->
+
+        </div> <!-- Fim da Folha (SÓ FECHA AQUI AGORA) -->
+    
+    </div> <!-- Fim do Caderno -->
+
+    <script src="javascripts/script.js"></script>
+</body>
+</html>

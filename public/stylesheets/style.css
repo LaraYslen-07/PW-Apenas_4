@@ -1,0 +1,831 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* =========================================
+   BARRA DE NAVEGAÇÃO (NAVBAR)
+   ========================================= */
+/* Animação para a barra descer suavemente ao abrir */
+@keyframes descerBarra {
+    from { transform: translateY(-100%); } /* Começa escondida pra cima */
+    to { transform: translateY(0); }       /* Termina no lugar certo */
+}
+
+.navbar {
+    /* 1. Comportamento de rolagem */
+    position: absolute; /* Absolute faz ela subir junto com a página (não fica fixa na tela) */
+    
+    /* 2. Posição e Visual */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    padding: 0 20px;
+
+    /* 3. Aplica a animação que você mandou */
+    animation: descerBarra 0.8s ease-out; 
+}
+
+
+/* Classe que será adicionada pelo JS para esconder a barra */
+.navbar-hidden {
+    top: -100px; /* Move a barra para fora da tela (para cima) */
+}
+
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* Espalha os itens */
+    align-items: center;
+    height: 70px; /* Altura da barra */
+}
+
+/* Logo */
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-logo:hover {
+    color: #ff7043;
+}
+
+/* Lista de Links */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px; /* Espaço entre os links */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    color: #555;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s;
+    position: relative;
+}
+
+/* Efeito de sublinhado ao passar o mouse */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ff7043;
+    transition: width 0.3s;
+}
+
+.nav-link:hover {
+    color: #ff7043;
+}
+
+.nav-link:hover::after {
+    width: 100%; /* O sublinhado cresce ao passar o mouse */
+}
+
+/* Botão de Login */
+/* Container para os botões ficarem alinhados */
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaço entre os botões */
+}
+
+/* Botão ENTRAR (Discreto / Secundário) */
+/* Estilo "Ghost" ou apenas texto colorido */
+.btn-entrar {
+    color: #555; /* Cinza escuro */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+.btn-entrar:hover {
+    color: #ff7043; /* Fica laranja ao passar o mouse */
+    background-color: rgba(255, 112, 67, 0.1); /* Fundo laranja bem clarinho */
+}
+
+/* Botão CADASTRAR (Chamativo / Primário) */
+/* Igual ao que era o antigo botão de entrar */
+.btn-cadastrar {
+    background-color: #ff7043; /* Laranja forte */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 10px 25px; /* Um pouco maior pra chamar atenção */
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(255, 112, 67, 0.3); /* Sombraelevada */
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-cadastrar:hover {
+    background-color: #c9f41e; /* Laranja mais escuro */
+    transform: translateY(-2px); /* Efeito de pulinho */
+    box-shadow: 0 6px 10px rgba(149, 255, 67, 0.4);
+}
+
+
+
+
+/* =========================================
+   AJUSTE NO BODY (para não esconder conteúdo)
+   ========================================= */
+
+
+body {
+    background-size: cover; /* Cobre a tela toda */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* O fundo fica parado enquanto o site rola */
+    /* Gradiente suave de azul para roxo, bem moderno */
+    background: linear-gradient(135deg, #84ccc1 0%, #4ba29b 100%);
+     background-image: url('../images/fundocinza.png');
+    padding: 40px;
+    padding-top: 100px;
+    font-family: "Segoe UI", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza o caderno na tela */
+}
+
+.caderno {
+    position: relative;
+    
+    /* AUMENTADO: Caderno mais largo (95% da tela ou até 1100px) */
+    width: 1100px;
+    max-width: 95vw; 
+    
+    margin: auto;
+    display: flex;
+    align-items: stretch;
+    
+    /* AUMENTADO: Caderno mais alto */
+    min-height: 750px;
+}
+
+/* A ESPIRAL */
+.espiral {
+    width: 70px;
+    background: linear-gradient(90deg, #e0e0e0, #f0f0f0);
+    position: relative;
+    border-right: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.espiral::before {
+    content: "";
+    position: absolute;
+    left: 25px;
+    top: 20px;
+    bottom: 20px;
+    width: 14px;
+    
+    /* Arame metálico escuro */
+    background-image: repeating-linear-gradient(
+        to bottom,
+        #444 0px,
+        #444 6px,
+        transparent 6px,
+        transparent 35px
+    );
+    
+    border-radius: 5px;
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+}
+
+/* A FOLHA DE PAPEL */
+.folha {
+    flex: 1;
+    /* Aumentei o padding interno para acompanhar o tamanho maior */
+    padding: 70px 80px; 
+    
+    /* Cor de fundo amarelada (Papel Pólen) */
+    background-color: #fffef0; 
+    
+    /* Textura de papel */
+    background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+    
+    border: 1px solid #e0d0b0;
+    box-shadow: 15px 15px 30px rgba(0,0,0,0.2);
+    border-radius: 0 5px 5px 0;
+    color: #4a3b32;
+}
+
+.folha h1 {
+    /* Fonte Arizonia */
+  font: 400 130px/0.8 'Cookie', Helvetica, sans-serif;
+  color: #fff;
+  text-shadow: 4px 4px 3px rgba(0,0,0,0.1); 
+    
+    color: #2b2b2b; /* Cinza escuro */
+    
+    /* Sombra sólida retrô */
+    text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+    
+    /* Margens para não colar no topo */
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+
+
+.folha p {
+    /* Aumentei a fonte do texto */
+    font-size: 1.3rem; 
+    color: #6d5b50;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* BOTÃO */
+.botao-entrar {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 15px 40px; /* Botão maior */
+    background-color: #ff7043;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem; /* Fonte do botão maior */
+    border-radius: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.botao-entrar:hover {
+    background-color: #f4511e;
+    transform: translateY(-2px);
+}
+.passo-a-passo {
+    margin-top: 50px;
+    text-align: left; /* Alinha texto à esquerda */
+}
+
+.timeline {
+    position: relative;
+    padding-left: 30px; /* Espaço para a linha */
+    margin-top: 30px;
+}
+
+/* A Linha Cinza (Fundo) */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px; /* Centraliza na bolinha */
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+}
+
+/* A Linha Colorida (Que vai animar) */
+.linha-progresso {
+    position: absolute;
+    left: 15px;
+    top: 0;
+    width: 4px;
+    background: #ff7043; /* Laranja */
+    height: 0%; /* Começa vazia */
+    transition: height 0.5s ease; /* Animação suave */
+    z-index: 1;
+}
+
+/* Cada Item (Passo) */
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding-left: 20px;
+}
+
+/* As Bolinhas */
+.bolinha {
+    position: absolute;
+    left: -30px; /* Alinha em cima da linha */
+    top: 0;
+    width: 35px;
+    height: 35px;
+    background: white;
+    border: 3px solid #e0e0e0; /* Cinza inicialmente */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #999;
+    z-index: 2; /* Fica acima da linha */
+    transition: all 0.3s;
+}
+
+/* Estilo quando o passo é ativado */
+.bolinha.ativo {
+    border-color: #ff7043;
+    background: #ff7043;
+    color: white;
+    transform: scale(1.1); /* Pulinho */
+}
+
+.conteudo h3 {
+    margin: 0;
+    color: #5d4037;
+    font-size: 1.4rem;
+}
+.hero-titulo {
+    position: relative;
+    display: inline-block; /* O container abraça o tamanho do texto */
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.hero-titulo h1 {
+    /* O estilo da fonte Cookie que você já tem */
+    font-family: 'Cookie', cursive;
+    font-size: 6rem; /* Ajuste para ficar grande como no desenho */
+    line-height: 1;
+    margin: 0;
+    z-index: 2;
+    position: relative;
+}
+
+/* Estilo Base para as Imagens Flutuantes */
+.icone-flutuante {
+    position: absolute;
+    /* REMOVA o font-size se tiver */
+    /* ADICIONE ISSO: */
+    width: 100px; /* Tamanho controlado da imagem */
+    height: auto; /* Mantém a proporção */
+    opacity: 0.9;
+}
+
+/* Chapéu na Direita */
+.chapeu {
+    top: -20px;
+    right: -120px; /* Empurrei mais pra direita */
+    
+    transform: rotate(20deg);
+    
+    width: 110px; /* Chapéu costuma ser maiorzinho */
+}
+/* Container da Foto de Perfil */
+.perfil-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+/* Bolinha da Imagem */
+.preview-img {
+    width: 100px;
+    height: 100px;
+    background-color: #e0e0e0;
+    border: 3px solid #fff;
+    border-radius: 50%; /* Faz ficar redondo */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Corta a imagem pra não sair da bolinha */
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.preview-img:hover {
+    transform: scale(1.05);
+    background-color: #d0d0d0;
+}
+
+/* Ícone de câmera dentro da bolinha */
+#icon-camera {
+    font-size: 2rem;
+    color: #888;
+}
+
+/* A imagem carregada (inicialmente escondida) */
+#foto-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a foto preencha a bolinha sem esticar */
+}
+
+/* Botão de texto "Escolher Foto" */
+.btn-upload-foto {
+    color: #ff7043;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-upload-foto:hover {
+    text-decoration: underline;
+}
+
+/* Ajuste para o Textarea da Bio */
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 2px solid #e0d0b0;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-family: 'Segoe UI', sans-serif;
+    resize: none; /* Impede o usuário de quebrar o layout esticando */
+}
+
+textarea:focus {
+    border-color: #ff7043;
+    background-color: #fff;
+    outline: none;
+}
+/* =========================================
+   BOTÃO DE SALVAR (ESTILO PREMIUM)
+   ========================================= */
+
+.botao-largo {
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    
+    /* Gradiente Moderno (Laranja para avermelhado) */
+    background: linear-gradient(135deg, #ff7043 0%, #ff5722 100%);
+    
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700; /* Letra mais grossa */
+    text-transform: uppercase; /* Letras maiúsculas para impor respeito */
+    letter-spacing: 1px; /* Espacinho entre as letras */
+    
+    border: none;
+    border-radius: 50px; /* Bordas bem arredondadas (formato pílula) */
+    cursor: pointer;
+    
+    /* Sombra suave para dar profundidade */
+    box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+    
+    /* Animação suave */
+    transition: all 0.3s ease;
+}
+
+/* Quando passa o mouse em cima */
+.botao-largo:hover {
+    background: linear-gradient(135deg, #ff8a65 0%, #ff7043 100%); /* Fica mais claro */
+    transform: translateY(-3px); /* O botão sobe um pouquinho */
+    box-shadow: 0 8px 20px rgba(255, 87, 34, 0.5); /* A sombra aumenta */
+}
+
+/* Quando clica no botão */
+.botao-largo:active {
+    transform: translateY(1px); /* O botão desce (efeito de clique) */
+    box-shadow: 0 2px 10px rgba(255, 87, 34, 0.3);
+}
+/* =========================================
+   PÁGINA DE FEED (RECEITAS)
+   ========================================= */
+
+.feed-header {
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 2px dashed #e0d0b0; /* Linha pontilhada separando título */
+    padding-bottom: 20px;
+}
+
+.feed-header h1 {
+    font-family: 'Cookie', cursive;
+    font-size: 4rem;
+    color: #4a3b32;
+    margin: 0;
+}
+
+.feed-header p {
+    color: #777;
+    font-size: 1.1rem;
+}
+
+/* --- ESTADO VAZIO (EMPTY STATE) --- */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.empty-icon {
+    width: 150px;
+    height: 150px;
+    background-color: rgba(0,0,0,0.03); /* Fundo cinza bem clarinho */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 3px dashed #d0c0a0; /* Borda pontilhada parecendo desenho */
+}
+
+.empty-icon i {
+    font-size: 4rem;
+    color: #c0b090; /* Cor de lápis/pastel */
+}
+
+.empty-state h2 {
+    font-family: 'Segoe UI', sans-serif;
+    color: #5d4037;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.empty-state p {
+    color: #888;
+    max-width: 400px;
+    margin-bottom: 30px;
+}
+/* =========================================
+   ESTILO DA PÁGINA DE FEED (MESA CHEIA)
+   ========================================= */
+
+/* Ajuste no Body só para essa página */
+body.pagina-feed {
+    display: block; /* Remove o flex centralizado do caderno */
+    padding-top: 80px; /* Espaço pra navbar */
+    overflow-x: hidden; /* Evita rolagem lateral */
+}
+
+/* Container Principal */
+.mesa-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex; /* Coloca Sidebar e Grid lado a lado */
+    gap: 40px;
+    padding: 20px;
+    align-items: flex-start; /* Alinha no topo */
+}
+
+/* --- SIDEBAR COM POST-ITS --- */
+.sidebar-filtros {
+    width: 250px;
+    flex-shrink: 0; /* Não deixa espremer */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: sticky; /* Fica preso quando rola */
+    top: 100px;
+}
+
+/* Estilo do Post-it */
+.postit {
+    padding: 20px;
+    font-family: 'Kalam', cursive; /* Fonte manuscrita */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    transform: rotate(-2deg); /* Levemente torto */
+    transition: transform 0.3s;
+    position: relative;
+}
+
+.postit:hover {
+    transform: rotate(0deg) scale(1.02); /* Endireita ao passar o mouse */
+    z-index: 10;
+}
+
+/* Cores dos Post-its */
+.amarelo { background-color: #fff9c4; color: #5d4037; }
+.rosa { background-color: #ffccbc; color: #bf360c; transform: rotate(3deg); }
+
+.postit h3 {
+    margin-bottom: 10px;
+    border-bottom: 1px dashed rgba(0,0,0,0.1);
+    padding-bottom: 5px;
+}
+
+.postit ul {
+    list-style: none;
+    padding: 0;
+}
+
+.postit li {
+    margin-bottom: 8px;
+}
+
+.postit a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+    display: block;
+}
+
+.postit a:hover, .postit a.ativo {
+    text-decoration: underline;
+    /* Marcador de texto */
+    background: rgba(0,0,0,0.05);
+    border-radius: 4px;
+}
+
+/* --- ÁREA CENTRAL (GRID) --- */
+.feed-grid {
+    flex: 1; /* Ocupa o resto do espaço */
+}
+
+.titulo-feed h1 {
+    font-family: 'Cookie', cursive;
+    font-size: 5rem;
+    color: #fff; /* Branco pra destacar na mesa verde */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* --- FICHA VAZIA (Papel Pautado) --- */
+.ficha-receita-vazia {
+    background-color: #fff;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 2px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    text-align: center;
+    position: relative;
+    
+    /* Linhas de pauta azul */
+    background-image: repeating-linear-gradient(to bottom, transparent 0px, transparent 29px, #b3e5fc 30px);
+}
+
+.furo-papel {
+    width: 15px;
+    height: 15px;
+    background-color: #333; /* Cor da mesa (furo escuro) */
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.ficha-receita-vazia h2 {
+    font-family: 'Cookie', cursive;
+    font-size: 3rem;
+    margin-top: 20px;
+    background-color: rgba(255,255,255,0.8); /* Fundo branco pro texto ler melhor na pauta */
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.ficha-receita-vazia p {
+    font-family: 'Kalam', cursive;
+    font-size: 1.2rem;
+    color: #555;
+    background-color: rgba(255,255,255,0.6);
+}
+
+/* Botão Flutuante na Navbar */
+.btn-adicionar-receita {
+    background-color: #4caf50; /* Verde diferente pra destacar */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+/* =========================================
+   PÁGINA DE CRIAR RECEITA
+   ========================================= */
+
+/* Área de Upload de Foto (Retângulo Grande) */
+.upload-receita-container {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.area-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    border: 3px dashed #d0c0a0;
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #888;
+    position: relative;
+    overflow: hidden;
+}
+
+.area-upload:hover {
+    background-color: rgba(255, 112, 67, 0.1);
+    border-color: #ff7043;
+    color: #ff7043;
+}
+
+.area-upload i {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+/* Imagem de preview cobre tudo */
+#preview-receita {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Input de Título (Letra Maior) */
+.input-titulo {
+    font-size: 1.5rem !important;
+    font-weight: bold;
+    color: #4a3b32;
+    padding: 15px !important;
+}
+
+/* Grid dos 4 Ingredientes */
+.secao-ingredientes {
+    margin: 30px 0;
+    background-color: rgba(255,255,255,0.4);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e0d0b0;
+}
+
+.secao-ingredientes h3 {
+    font-family: 'Cookie', cursive;
+    font-size: 2rem;
+    color: #5d4037;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.grid-ingredientes {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 colunas */
+    gap: 15px;
+}
+
+.grid-ingredientes input {
+    padding: 12px;
+    border: 2px solid #e0d0b0;
+    border-radius: 8px;
+    font-family: 'Kalam', cursive; /* Fonte manuscrita */
+    font-size: 1.1rem;
+}
+
+/* Botões de Categoria (Tags Selecionáveis) */
+.opcoes-categoria {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.radio-tag input {
+    display: none; /* Esconde a bolinha do rádio */
+}
+
+.radio-tag span {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #fff;
+    border: 2px solid #e0d0b0;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #555;
+    transition: all 0.2s;
+}
+
+/* Quando selecionado */
+.radio-tag input:checked + span {
+    background-color: #ff7043;
+    color: white;
+    border-color: #ff7043;
+    transform: scale(1.05);
+}

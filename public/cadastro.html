@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Apenas 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Apenas 4 🍳</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Início</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="login.html" class="btn-entrar">Já tenho conta</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CADERNO -->
+    <div class="caderno">
+        <div class="espiral"></div>
+
+        <!-- ATENÇÃO AQUI: Adicionei a classe "modo-centralizado" -->
+        <div class="folha modo-centralizado">
+            
+            <div class="form-header">
+                <h1>Seja um Chef!</h1>
+                <p>Crie sua conta e comece a compartilhar.</p>
+            </div>
+
+            <form id="form-cadastro" class="formulario-estilo" enctype="multipart/form-data">
+                
+                <!-- FOTO -->
+                <div class="perfil-upload-container">
+                    <div class="preview-img" id="preview-container">
+                        <i class="fa-solid fa-camera" id="icon-camera"></i>
+                        <img src="" alt="Preview" id="foto-preview" style="display: none;">
+                    </div>
+                    <label for="foto-perfil" class="btn-upload-foto">Escolher Foto</label>
+                    <input type="file" id="foto-perfil" name="foto" accept="image/*" style="display: none;">
+                </div>
+
+               <!-- INPUTS CORRIGIDOS (COM IDs) -->
+<div class="input-group">
+    <label for="nome">Nome de Usuário</label>
+    <div class="input-box">
+        <i class="fa-solid fa-user"></i>
+        <!-- Adicionei id="nome" -->
+        <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+    </div>
+</div>
+
+<div class="input-group">
+    <label for="email">E-mail</label>
+    <div class="input-box">
+        <i class="fa-solid fa-envelope"></i>
+        <!-- Adicionei id="email" -->
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+    </div>
+</div>
+
+<div class="input-group">
+    <label for="senha">Senha</label>
+    <div class="input-box">
+        <i class="fa-solid fa-lock"></i>
+        <!-- Adicionei id="senha" -->
+        <input type="password" id="senha" name="senha" placeholder="Senha secreta" required>
+    </div>
+</div>
+
+<div class="input-group">
+    <label for="bio">Bio</label>
+    <div class="input-box">
+        <!-- Adicionei id="bio" -->
+        <textarea id="bio" name="bio" rows="3" placeholder="O que você gosta de cozinhar?"></textarea>
+    </div>
+</div>
+
+
+                <button type="submit" class="botao-largo">Salvar Perfil</button>
+            </form>
+
+            <p class="rodape-form">
+                Já tem conta? <a href="login.html">Entrar</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="javascripts/cadastro.js"></script>
+</body>
+</html>
