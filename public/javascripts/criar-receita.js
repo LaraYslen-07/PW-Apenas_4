@@ -145,13 +145,36 @@ document.getElementById('form-receita').addEventListener('submit', async (e) => 
     const ingrediente3 = document.getElementById('ingrediente3').value;
     const ingrediente4 = document.getElementById('ingrediente4').value;
     const instrucoes = document.getElementById('instrucoes').value;
-    const categoria = document.querySelector('input[name="categoria"]:checked').value;
+    const categoria = document.querySelector('input[name="categoria"]:checked');
     const usuario = localStorage.getItem('usuario_id');
     const foto = document.getElementById('foto-receita').files[0];
 
+    // Validações básicas
+    if (!titulo.trim()) {
+        alert('O título é obrigatório!');
+        return;
+    }
+    
+    if (!ingrediente1.trim() || !ingrediente2.trim() || !ingrediente3.trim() || !ingrediente4.trim()) {
+        alert('Todos os 4 ingredientes são obrigatórios!');
+        return;
+    }
+    
+    if (!categoria) {
+        alert('Selecione uma categoria!');
+        return;
+    }
+    
     if (!usuario) {
         alert('Você precisa estar logado para criar uma receita.');
         window.location.href = 'login.html';
+        return;
+    }
+
+    // Verificar se pelo menos uma etapa foi preenchida
+    const etapasValidas = etapas.filter(etapa => etapa.equipamento.trim() || etapa.descricao.trim());
+    if (etapasValidas.length === 0) {
+        alert('Adicione pelo menos uma etapa de preparo!');
         return;
     }
 
@@ -159,8 +182,8 @@ document.getElementById('form-receita').addEventListener('submit', async (e) => 
     formData.append('descricao', descricao);
     formData.append('ingredientes', `${ingrediente1}, ${ingrediente2}, ${ingrediente3}, ${ingrediente4}`);
     formData.append('instrucoes', instrucoes);
-    formData.append('etapas', JSON.stringify(etapas));
-    formData.append('categoria', categoria);
+    formData.append('etapas', JSON.stringify(etapasValidas));
+    formData.append('categoria', categoria.value);
     formData.append('usuario', usuario);
     
     if (foto) {

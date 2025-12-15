@@ -8,9 +8,9 @@ exports.criarReceita = async (req, res) => {
 
         const { titulo, descricao, ingredientes, instrucoes, categoria, usuario, etapas } = req.body;
 
-        // Se não veio foto, reclama
-        if (!req.file) {
-            return res.status(400).json({ erro: 'A foto é obrigatória!' });
+        // Validações básicas
+        if (!titulo || !ingredientes || !categoria || !usuario) {
+            return res.status(400).json({ erro: 'Campos obrigatórios não preenchidos!' });
         }
 
         const novaReceita = await Receita.create({
@@ -21,7 +21,7 @@ exports.criarReceita = async (req, res) => {
             etapas: etapas ? JSON.parse(etapas) : [],
             categoria,
             usuario,
-            foto: req.file.path // URL direta do Cloudinary
+            foto: req.file ? req.file.path : 'images/placeholder.jpg' // URL direta do Cloudinary ou placeholder
         });
 
         res.status(201).json({
