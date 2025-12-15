@@ -35,6 +35,20 @@ exports.criarReceita = async (req, res) => {
     }
 };
 
+// 2. Listar Receitas (GET)
+exports.listarReceitas = async (req, res) => {
+    try {
+        const { usuario, categoria } = req.query;
+        const filtro = {};
+        if (usuario) filtro.usuario = usuario;
+        if (categoria) filtro.categoria = categoria;
+        const receitas = await Receita.find(filtro).sort({ dataCriacao: -1 }); // Mais recentes primeiro
+        res.status(200).json(receitas);
+    } catch (error) {
+        res.status(500).json({ erro: 'Erro ao buscar receitas.' });
+    }
+};
+
 // 3. Curtir/Descurtir Receita
 exports.toggleLike = async (req, res) => {
     try {
