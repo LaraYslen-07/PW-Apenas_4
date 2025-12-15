@@ -113,8 +113,26 @@ async function toggleLike(receitaId, btn) {
     }
 }
 
+// Carregar Foto de Perfil na Navbar
+function carregarFotoPerfilNav() {
+    const usuarioId = localStorage.getItem('usuario_id');
+    if (usuarioId) {
+        // Buscar dados do usuário para pegar a foto
+        fetch(`/api/usuarios/${usuarioId}`)
+            .then(res => res.json())
+            .then(usuario => {
+                const img = document.getElementById('nav-foto-perfil');
+                if (img) {
+                    img.src = usuario.foto || 'images/default-avatar.png';
+                }
+            })
+            .catch(err => console.error('Erro ao carregar foto do perfil:', err));
+    }
+}
+
 // Carregar quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
     carregarReceitas();
     configurarFiltros();
+    carregarFotoPerfilNav();
 });

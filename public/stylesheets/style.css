@@ -144,6 +144,29 @@
 }
 
 
+/* Alinha os itens da direita (botão + foto) verticalmente */
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaço entre o botão "Nova Receita" e a foto */
+}
+
+/* Estilo da "bolinha" */
+.nav-avatar {
+    width: 40px;            /* Tamanho pequeno (pequenininha) */
+    height: 40px;           /* Altura igual para ser quadrado */
+    border-radius: 50%;     /* Transforma o quadrado em círculo */
+    object-fit: cover;      /* Garante que a foto não estique */
+    cursor: pointer;        /* Mãozinha ao passar o mouse */
+    border: 2px solid #ddd; /* Opcional: uma borda fina para destacar */
+    transition: 0.2s;       /* Efeito suave ao passar o mouse */
+}
+
+/* Efeito opcional: aumenta levemente ao passar o mouse */
+.nav-avatar:hover {
+    transform: scale(1.1);
+    border-color: #ff6a28; /* Cor destaque do seu tema */
+}
 
 
 /* =========================================
@@ -856,4 +879,26 @@ body.pagina-feed {
 
 .tabs-perfil button:not(.tab-ativo):hover {
     background: #e9ecef;
+}
+
+/* =========================================
+   FOTO DE PERFIL NA NAVBAR
+   ========================================= */
+.btn-perfil {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.foto-perfil-nav {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ff7043;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.foto-perfil-nav:hover {
+    border-color: #e55a2b;
 }

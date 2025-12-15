@@ -59,3 +59,34 @@ exports.listarReceitasCurtidas = async (req, res) => {
         res.status(500).json({ erro: 'Erro ao buscar receitas curtidas.' });
     }
 };
+
+// 3. Curtir/Descurtir Receita
+exports.toggleLike = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { usuario } = req.body;
+
+        if (!usuario) {
+            return res.status(400).json({ erro: 'Usuário não informado.' });
+        }
+
+        const receita = await Receita.findById(id);
+        if (!receita) {
+            return res.status(404).json({ erro: 'Receita não encontrada.' });
+        }
+
+        const index = receita.likes.indexOf(usuario);
+        if (index > -1) {
+            // Já curtiu, remover
+            receita.likes.splice(index, 1);
+        } else {
+            // Não curtiu, adicionar
+            receita.likes.push(usuario);
+        }
+
+        await receita.save();
+        res.status(200).json({ likes: receita.likes.length });
+    } catch (error) {
+        res.status(500).json({ erro: 'Erro ao curtir receita.' });
+    }
+};
