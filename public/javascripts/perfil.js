@@ -19,6 +19,9 @@ async function carregarPerfil() {
             document.getElementById('bio-usuario').textContent = usuario.bio || 'Sem bio';
             document.getElementById('email-usuario').textContent = usuario.email;
             document.getElementById('foto-perfil').src = usuario.foto || 'images/default-avatar.png';
+            
+            // Carregar foto na navbar
+            carregarFotoPerfilNav();
         } else {
             alert('Erro ao carregar perfil: ' + usuario.erro);
         }
@@ -135,16 +138,24 @@ function exibirReceitas(receitas, isMinhas = false) {
     });
 }
 
-// Configurar Logout
-function configurarLogout() {
-    const btnLogout = document.getElementById('btn-logout');
-    btnLogout.addEventListener('click', () => {
-        localStorage.removeItem('usuario_id');
-        localStorage.removeItem('usuario_nome');
-        alert('Você foi desconectado.');
-        window.location.href = 'index.html';
-    });
+// Carregar Foto de Perfil na Navbar
+function carregarFotoPerfilNav() {
+    const usuarioId = localStorage.getItem('usuario_id');
+    if (usuarioId) {
+        // Buscar dados do usuário para pegar a foto
+        fetch(`/api/usuarios/${usuarioId}`)
+            .then(res => res.json())
+            .then(usuario => {
+                const img = document.getElementById('nav-foto-perfil');
+                if (img) {
+                    img.src = usuario.foto || 'images/default-avatar.png';
+                }
+            })
+            .catch(err => console.error('Erro ao carregar foto do perfil:', err));
+    }
 }
+
+// Configurar Logout
 
 // Configurar Abas
 function configurarAbas() {
@@ -222,6 +233,16 @@ async function deletarReceita(receitaId) {
 // Carregar quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
     carregarPerfil();
-    configurarLogout();
     configurarAbas();
+    
+    // Configurar logout na navbar
+    const btnLogout = document.getElementById('btn-logout');
+    if (btnLogout) {
+        btnLogout.addEventListener('click', () => {
+            localStorage.removeItem('usuario_id');
+            localStorage.removeItem('usuario_nome');
+            alert('Você foi desconectado.');
+            window.location.href = 'index.html';
+        });
+    }
 });

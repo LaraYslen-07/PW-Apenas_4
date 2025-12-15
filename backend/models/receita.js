@@ -21,6 +21,20 @@ const ReceitaSchema = new mongoose.Schema({
         type: String, 
         required: [true, 'As instruções são obrigatórias']
     },
+    etapas: [{
+        equipamento: {
+            type: String,
+            required: true
+        },
+        temperatura: {
+            type: String,
+            default: ''
+        },
+        descricao: {
+            type: String,
+            required: true
+        }
+    }],
     categoria: {
         type: String,
         enum: ['salgado', 'doce', 'saudavel', 'bebida'],

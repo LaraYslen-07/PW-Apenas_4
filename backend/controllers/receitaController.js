@@ -6,7 +6,7 @@ exports.criarReceita = async (req, res) => {
         console.log("Dados recebidos:", req.body);
         console.log("Arquivo recebido:", req.file); // Aqui vem a foto do Cloudinary
 
-        const { titulo, descricao, ingredientes, instrucoes, categoria, usuario } = req.body;
+        const { titulo, descricao, ingredientes, instrucoes, categoria, usuario, etapas } = req.body;
 
         // Se não veio foto, reclama
         if (!req.file) {
@@ -18,6 +18,7 @@ exports.criarReceita = async (req, res) => {
             descricao,
             ingredientes,
             instrucoes,
+            etapas: etapas ? JSON.parse(etapas) : [],
             categoria,
             usuario,
             foto: req.file.path // URL direta do Cloudinary
@@ -123,9 +124,10 @@ exports.deletarReceita = async (req, res) => {
 exports.atualizarReceita = async (req, res) => {
     try {
         const { id } = req.params;
-        const { titulo, descricao, ingredientes, instrucoes, categoria } = req.body;
+        const { titulo, descricao, ingredientes, instrucoes, categoria, etapas } = req.body;
 
         const updateData = { titulo, descricao, ingredientes, instrucoes, categoria };
+        if (etapas) updateData.etapas = JSON.parse(etapas);
         if (req.file) {
             updateData.foto = req.file.path; // Nova foto se enviada
         }

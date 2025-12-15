@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="pagina-feed">
+<body style="background-color: #faf9f6; margin: 0; padding: 0;">
 
     <!-- NAVBAR -->
     <nav class="navbar">
@@ -22,12 +22,18 @@
                 <a href="criar-receita.html" class="btn-adicionar-receita">
                     <i class="fa-solid fa-plus"></i> Nova Receita
                 </a>
+                <a href="perfil.html" class="btn-perfil">
+                    <img id="nav-foto-perfil" src="" alt="Perfil" class="foto-perfil-nav">
+                </a>
+                <button id="btn-logout" class="btn-logout-nav">
+                    <i class="fa-solid fa-sign-out-alt"></i> Sair
+                </button>
             </div>
         </div>
     </nav>
 
     <!-- ÁREA PRINCIPAL -->
-    <main class="mesa-container">
+    <main style="background-color: #faf9f6; min-height: 100vh; padding: 40px 20px;">
         <section class="perfil-container">
             <div class="perfil-header">
                 <img id="foto-perfil" src="" alt="Foto de Perfil" class="foto-perfil-grande">
@@ -35,7 +41,6 @@
                     <h1 id="nome-usuario"></h1>
                     <p id="bio-usuario"></p>
                     <p id="email-usuario"></p>
-                    <button id="btn-logout" class="botao-largo">Sair</button>
                 </div>
             </div>
 

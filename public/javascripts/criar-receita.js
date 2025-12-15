@@ -9,6 +9,56 @@ const urlParams = new URLSearchParams(window.location.search);
 const isEdit = urlParams.has('edit');
 const editId = urlParams.get('edit');
 
+// Gerenciamento de Etapas
+let etapas = [];
+
+// Função para criar HTML de uma etapa
+function criarEtapaHTML(etapa, index) {
+    return `
+        <div class="etapa-item" data-index="${index}">
+            <div class="etapa-header">
+                <span class="etapa-numero">Etapa ${index + 1}</span>
+                <button type="button" class="btn-remover-etapa" onclick="removerEtapa(${index})">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="etapa-grid">
+                <input type="text" placeholder="Equipamento" value="${etapa.equipamento || ''}" onchange="atualizarEtapa(${index}, 'equipamento', this.value)">
+                <input type="text" placeholder="Temperatura (opcional)" value="${etapa.temperatura || ''}" onchange="atualizarEtapa(${index}, 'temperatura', this.value)">
+                <div class="etapa-descricao">
+                    <textarea placeholder="Descrição do passo" onchange="atualizarEtapa(${index}, 'descricao', this.value)">${etapa.descricao || ''}</textarea>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Função para adicionar etapa
+function adicionarEtapa() {
+    etapas.push({ equipamento: '', temperatura: '', descricao: '' });
+    atualizarEtapasHTML();
+}
+
+// Função para remover etapa
+function removerEtapa(index) {
+    etapas.splice(index, 1);
+    atualizarEtapasHTML();
+}
+
+// Função para atualizar etapa
+function atualizarEtapa(index, campo, valor) {
+    etapas[index][campo] = valor;
+}
+
+// Função para atualizar HTML das etapas
+function atualizarEtapasHTML() {
+    const container = document.getElementById('etapas-container');
+    container.innerHTML = etapas.map((etapa, index) => criarEtapaHTML(etapa, index)).join('');
+}
+
+// Event listener para o botão adicionar etapa
+document.getElementById('adicionar-etapa').addEventListener('click', adicionarEtapa);
+
 inputFoto.addEventListener('change', function(e) {
     const file = e.target.files[0];
     
@@ -48,6 +98,12 @@ async function carregarReceitaParaEdicao() {
             if (ingredientes.length > 1) document.getElementById('ingrediente2').value = ingredientes[1];
             if (ingredientes.length > 2) document.getElementById('ingrediente3').value = ingredientes[2];
             if (ingredientes.length > 3) document.getElementById('ingrediente4').value = ingredientes[3];
+
+            // Preencher etapas
+            if (receita.etapas && receita.etapas.length > 0) {
+                etapas = receita.etapas;
+                atualizarEtapasHTML();
+            }
 
             // Selecionar categoria
             const categoriaRadio = document.querySelector(`input[name="categoria"][value="${receita.categoria}"]`);
@@ -103,6 +159,7 @@ document.getElementById('form-receita').addEventListener('submit', async (e) => 
     formData.append('descricao', descricao);
     formData.append('ingredientes', `${ingrediente1}, ${ingrediente2}, ${ingrediente3}, ${ingrediente4}`);
     formData.append('instrucoes', instrucoes);
+    formData.append('etapas', JSON.stringify(etapas));
     formData.append('categoria', categoria);
     formData.append('usuario', usuario);
     

@@ -119,14 +119,41 @@ function abrirModal(receita) {
     const modal = document.getElementById('modal-receita');
     const modalBody = document.getElementById('modal-body');
 
+    let etapasHTML = '';
+    if (receita.etapas && receita.etapas.length > 0) {
+        etapasHTML = `
+            <h3>Modo de Preparo - Etapas</h3>
+            <div class="etapas-lista">
+                ${receita.etapas.map((etapa, index) => `
+                    <div class="etapa-modal">
+                        <div class="etapa-cabecalho">
+                            <span class="etapa-numero-modal">Etapa ${index + 1}</span>
+                        </div>
+                        <div class="etapa-detalhes">
+                            <p><strong>Equipamento:</strong> ${etapa.equipamento}</p>
+                            ${etapa.temperatura ? `<p><strong>Temperatura:</strong> ${etapa.temperatura}</p>` : ''}
+                            <p><strong>Descrição:</strong> ${etapa.descricao}</p>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
     modalBody.innerHTML = `
-        <img src="${receita.foto || 'images/placeholder.jpg'}" alt="${receita.titulo}" style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
-        <h2>${receita.titulo}</h2>
-        <p><strong>Descrição:</strong> ${receita.descricao}</p>
-        <p><strong>Ingredientes:</strong> ${receita.ingredientes}</p>
-        <p><strong>Instruções:</strong> ${receita.instrucoes}</p>
-        <p><strong>Categoria:</strong> ${receita.categoria}</p>
-        <p><strong>Curtidas:</strong> ${receita.likes ? receita.likes.length : 0}</p>
+        <div class="modal-receita-header">
+            <img src="${receita.foto || 'images/placeholder.jpg'}" alt="${receita.titulo}" class="foto-modal">
+            <div class="info-modal">
+                <h2>${receita.titulo}</h2>
+                <p class="descricao-modal">${receita.descricao}</p>
+                <div class="detalhes-modal">
+                    <p><strong>Ingredientes:</strong> ${receita.ingredientes}</p>
+                    <p><strong>Categoria:</strong> ${receita.categoria}</p>
+                    <p><strong>Curtidas:</strong> ${receita.likes ? receita.likes.length : 0}</p>
+                </div>
+            </div>
+        </div>
+        ${etapasHTML}
     `;
 
     modal.style.display = 'block';
