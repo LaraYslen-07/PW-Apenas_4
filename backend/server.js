@@ -12,6 +12,31 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
+// --- ROTAS ---
+// Aqui vamos ligar as rotas que criamos nas pastas
+app.use((req, res, next) => {
+    console.log(`📡 Recebi um pedido em: ${req.method} ${req.url}`);
+    next();
+});
+
+app.use('/api/usuarios', require('./routes/usuario'));
+app.use('/api/receitas', require('./routes/Receita'));
+// Rota de saúde
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'API Apenas 4 está funcionando!' });
+});
+
+
+// Rota raiz
+app.get('/', (req, res) => {
+    res.json({ mensagem: 'Bem-vindo à API do Apenas 4 Ingredientes 🍳' });
+});
+
+// Middleware de erro para rotas não encontradas
+app.use((req, res) => {
+    res.status(404).json({ erro: 'Rota não encontrada' });
+});
+
 // Conectar ao MongoDB Atlas
 const connectDB = async () => {
   try {
@@ -20,38 +45,13 @@ const connectDB = async () => {
     console.log('✅ Conectado ao MongoDB Atlas (Apenas 4)');
   } catch (error) {
     console.error('❌ Erro ao conectar ao MongoDB:', error.message);
-    process.exit(1);
+    // Don't exit, just log
   }
 };
 
 // Função para iniciar o servidor
 const startServer = async () => {
   await connectDB();
-
-  // --- ROTAS ---
-  // Aqui vamos ligar as rotas que criamos nas pastas
-  app.use((req, res, next) => {
-    console.log(`📡 Recebi um pedido em: ${req.method} ${req.url}`);
-    next();
-});
-
-app.use('/api/usuarios', require('./routes/usuario'));
-app.use('/api/receitas', require('./routes/Receita'));
-  // Rota de saúde
-  app.get('/api/health', (req, res) => {
-    res.json({ status: 'API Apenas 4 está funcionando!' });
-  });
-  
-
-  // Rota raiz
-  app.get('/', (req, res) => {
-    res.json({ mensagem: 'Bem-vindo à API do Apenas 4 Ingredientes 🍳' });
-  });
-
-  // Middleware de erro para rotas não encontradas
-  app.use((req, res) => {
-    res.status(404).json({ erro: 'Rota não encontrada' });
-  });
 
   // Iniciar servidor
   const PORT = process.env.PORT || 3000;
