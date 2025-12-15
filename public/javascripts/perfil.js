@@ -76,6 +76,9 @@ function exibirReceitas(receitas) {
         return;
     }
 
+    // Limpar grid
+    grid.innerHTML = '';
+
     receitas.forEach(receita => {
         const card = document.createElement('div');
         card.className = 'card-receita';
