@@ -195,6 +195,9 @@ document.getElementById('form-receita').addEventListener('submit', async (e) => 
         return;
     }
 
+    // Criar FormData para envio
+    const formData = new FormData();
+
     formData.append('titulo', titulo);
     formData.append('descricao', descricao);
     formData.append('ingredientes', `${ingrediente1}, ${ingrediente2}, ${ingrediente3}, ${ingrediente4}`);
