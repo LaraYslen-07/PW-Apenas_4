@@ -829,3 +829,31 @@ body.pagina-feed {
     border-color: #ff7043;
     transform: scale(1.05);
 }
+
+/* =========================================
+   ABAS DO PERFIL
+   ========================================= */
+.tabs-perfil {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.tabs-perfil button {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px 5px 0 0;
+    transition: background 0.3s;
+}
+
+.tabs-perfil button.tab-ativo {
+    background: #ff7043;
+    color: white;
+    border-color: #ff7043;
+}
+
+.tabs-perfil button:not(.tab-ativo):hover {
+    background: #e9ecef;
+}
