@@ -11,4 +11,7 @@ router.post('/login', usuarioController.loginUsuario);
 // Rota GET para listar usuarios
 router.get('/', usuarioController.listarUsuarios);
 
+// Rota GET para obter usuario por ID
+router.get('/:id', usuarioController.obterUsuario);
+
 module.exports = router;
