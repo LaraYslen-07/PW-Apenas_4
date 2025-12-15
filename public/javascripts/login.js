@@ -21,7 +21,7 @@ if (!formLogin) {
             botao.disabled = true;
 
             // Faz o pedido pro servidor
-            const resposta = await fetch('http://localhost:3000/api/usuarios/login', {
+            const resposta = await fetch('/api/usuarios/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, senha })

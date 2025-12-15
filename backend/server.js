@@ -36,6 +36,7 @@ const startServer = async () => {
 });
 
 app.use('/api/usuarios', require('./routes/usuario'));
+app.use('/api/receitas', require('./routes/Receita'));
   // Rota de saúde
   app.get('/api/health', (req, res) => {
     res.json({ status: 'API Apenas 4 está funcionando!' });

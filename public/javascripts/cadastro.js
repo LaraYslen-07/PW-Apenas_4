@@ -57,18 +57,8 @@ document.getElementById('form-cadastro').addEventListener('submit', async (e) =>
         botao.innerText = "Salvando...";
         botao.disabled = true;
 
-        // 2. Criar FormData para enviar texto + arquivo
-        const formData = new FormData();
-        formData.append('nome', nome);
-        formData.append('email', email);
-        formData.append('senha', senha);
-        formData.append('bio', bio);
-        if (foto) {
-            formData.append('foto', foto);
-        }
-
         // Enviar para o servidor
-        const resposta = await fetch('http://localhost:3000/api/usuarios', {
+        const resposta = await fetch('/api/usuarios', {
             method: 'POST',
             body: formData
         });
