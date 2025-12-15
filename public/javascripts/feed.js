@@ -45,8 +45,17 @@ function exibirReceitas(receitas) {
                 <div class="instrucoes">
                     <strong>Instruções:</strong> ${receita.instrucoes}
                 </div>
+                <div class="acoes-receita">
+                    <button class="btn-like" data-id="${receita._id}">
+                        <i class="fa-solid fa-heart"></i> <span class="likes-count">${receita.likes ? receita.likes.length : 0}</span>
+                    </button>
+                </div>
             </div>
         `;
+
+        // Adicionar evento ao botão de like
+        const btnLike = card.querySelector('.btn-like');
+        btnLike.addEventListener('click', () => toggleLike(receita._id, btnLike));
 
         feedGrid.appendChild(card);
     });
@@ -76,6 +85,32 @@ function configurarFiltros() {
             carregarReceitas(categoria);
         });
     });
+}
+
+// Toggle Like
+async function toggleLike(receitaId, btn) {
+    const usuarioId = localStorage.getItem('usuario_id');
+    if (!usuarioId) {
+        alert('Você precisa estar logado para curtir receitas.');
+        return;
+    }
+
+    try {
+        const resposta = await fetch(`/api/receitas/${receitaId}/like`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ usuario: usuarioId })
+        });
+
+        if (resposta.ok) {
+            const data = await resposta.json();
+            btn.querySelector('.likes-count').textContent = data.likes;
+        } else {
+            alert('Erro ao curtir receita.');
+        }
+    } catch (erro) {
+        console.error('Erro:', erro);
+    }
 }
 
 // Carregar quando a página carregar

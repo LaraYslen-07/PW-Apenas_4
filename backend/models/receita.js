@@ -31,6 +31,10 @@ const ReceitaSchema = new mongoose.Schema({
         ref: 'Usuario',
         required: true
     },
+    likes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Usuario'
+    }],
     dataCriacao: {
         type: Date,
         default: Date.now

@@ -12,4 +12,7 @@ router.post('/', upload.single('foto'), receitaController.criarReceita);
 // Rota: GET /api/receitas (Lista todas)
 router.get('/', receitaController.listarReceitas);
 
+// Rota: POST /api/receitas/:id/like (Curtir/Descurtir)
+router.post('/:id/like', receitaController.toggleLike);
+
 module.exports = router;

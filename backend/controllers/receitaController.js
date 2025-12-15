@@ -35,14 +35,33 @@ exports.criarReceita = async (req, res) => {
     }
 };
 
-// 2. Listar Receitas (GET)
-exports.listarReceitas = async (req, res) => {
+// 3. Curtir/Descurtir Receita
+exports.toggleLike = async (req, res) => {
     try {
-        const { usuario } = req.query;
-        const filtro = usuario ? { usuario } : {};
-        const receitas = await Receita.find(filtro).sort({ dataCriacao: -1 }); // Mais recentes primeiro
-        res.status(200).json(receitas);
+        const { id } = req.params;
+        const { usuario } = req.body;
+
+        if (!usuario) {
+            return res.status(400).json({ erro: 'Usuário não informado.' });
+        }
+
+        const receita = await Receita.findById(id);
+        if (!receita) {
+            return res.status(404).json({ erro: 'Receita não encontrada.' });
+        }
+
+        const index = receita.likes.indexOf(usuario);
+        if (index > -1) {
+            // Já curtiu, remover
+            receita.likes.splice(index, 1);
+        } else {
+            // Não curtiu, adicionar
+            receita.likes.push(usuario);
+        }
+
+        await receita.save();
+        res.status(200).json({ likes: receita.likes.length });
     } catch (error) {
-        res.status(500).json({ erro: 'Erro ao buscar receitas.' });
+        res.status(500).json({ erro: 'Erro ao curtir receita.' });
     }
 };
