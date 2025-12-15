@@ -24,17 +24,46 @@ async function carregarPerfil() {
         }
 
         // Carregar receitas do usuário
-        const respostaReceitas = await fetch(`/api/receitas?usuario=${usuarioId}`);
-        const receitas = await respostaReceitas.json();
+        carregarMinhasReceitas();
+    } catch (erro) {
+        console.error('Erro de conexão:', erro);
+        alert('Erro ao carregar perfil.');
+    }
+}
 
-        if (respostaReceitas.ok) {
+// Carregar Receitas do Usuário
+async function carregarMinhasReceitas() {
+    const usuarioId = localStorage.getItem('usuario_id');
+
+    try {
+        const resposta = await fetch(`/api/receitas?usuario=${usuarioId}`);
+        const receitas = await resposta.json();
+
+        if (resposta.ok) {
             exibirReceitas(receitas);
         } else {
             console.error('Erro ao carregar receitas:', receitas.erro);
         }
     } catch (erro) {
         console.error('Erro de conexão:', erro);
-        alert('Erro ao carregar perfil.');
+    }
+}
+
+// Carregar Receitas Curtidas
+async function carregarReceitasCurtidas() {
+    const usuarioId = localStorage.getItem('usuario_id');
+
+    try {
+        const resposta = await fetch(`/api/receitas/curtidas/${usuarioId}`);
+        const receitas = await resposta.json();
+
+        if (resposta.ok) {
+            exibirReceitas(receitas);
+        } else {
+            console.error('Erro ao carregar receitas curtidas:', receitas.erro);
+        }
+    } catch (erro) {
+        console.error('Erro de conexão:', erro);
     }
 }
 
@@ -89,6 +118,24 @@ function configurarLogout() {
     });
 }
 
+// Configurar Abas
+function configurarAbas() {
+    const tabMinhas = document.getElementById('tab-minhas');
+    const tabCurtidos = document.getElementById('tab-curtidos');
+
+    tabMinhas.addEventListener('click', () => {
+        tabMinhas.classList.add('tab-ativo');
+        tabCurtidos.classList.remove('tab-ativo');
+        carregarMinhasReceitas();
+    });
+
+    tabCurtidos.addEventListener('click', () => {
+        tabCurtidos.classList.add('tab-ativo');
+        tabMinhas.classList.remove('tab-ativo');
+        carregarReceitasCurtidas();
+    });
+}
+
 // Toggle Like
 async function toggleLike(receitaId, btn) {
     const usuarioId = localStorage.getItem('usuario_id');
@@ -119,4 +166,5 @@ async function toggleLike(receitaId, btn) {
 document.addEventListener('DOMContentLoaded', () => {
     carregarPerfil();
     configurarLogout();
+    configurarAbas();
 });

@@ -12,6 +12,9 @@ router.post('/', upload.single('foto'), receitaController.criarReceita);
 // Rota: GET /api/receitas (Lista todas)
 router.get('/', receitaController.listarReceitas);
 
+// Rota: GET /api/receitas/curtidas/:id (Lista receitas curtidas por usuário)
+router.get('/curtidas/:id', receitaController.listarReceitasCurtidas);
+
 // Rota: POST /api/receitas/:id/like (Curtir/Descurtir)
 router.post('/:id/like', receitaController.toggleLike);
 
