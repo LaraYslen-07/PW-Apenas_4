@@ -69,5 +69,19 @@ function exibirReceitas(receitas) {
     });
 }
 
+// Configurar Logout
+function configurarLogout() {
+    const btnLogout = document.getElementById('btn-logout');
+    btnLogout.addEventListener('click', () => {
+        localStorage.removeItem('usuario_id');
+        localStorage.removeItem('usuario_nome');
+        alert('Você foi desconectado.');
+        window.location.href = 'index.html';
+    });
+}
+
 // Carregar quando a página carregar
-document.addEventListener('DOMContentLoaded', carregarPerfil);
+document.addEventListener('DOMContentLoaded', () => {
+    carregarPerfil();
+    configurarLogout();
+});

@@ -1,7 +1,8 @@
 // Carregar Receitas do Feed
-async function carregarReceitas() {
+async function carregarReceitas(categoria = '') {
     try {
-        const resposta = await fetch('/api/receitas');
+        const url = categoria ? `/api/receitas?categoria=${categoria}` : '/api/receitas';
+        const resposta = await fetch(url);
         const receitas = await resposta.json();
 
         if (resposta.ok) {
@@ -16,13 +17,17 @@ async function carregarReceitas() {
 
 // Exibir Receitas no Grid
 function exibirReceitas(receitas) {
-    const feedGrid = document.querySelector('.feed-grid');
+    const feedGrid = document.getElementById('grid-receitas');
 
     // Remover o estado vazio se houver
     const estadoVazio = document.querySelector('.ficha-receita-vazia');
     if (estadoVazio) {
         estadoVazio.remove();
     }
+
+    // Limpar cards anteriores
+    const cards = feedGrid.querySelectorAll('.card-receita');
+    cards.forEach(card => card.remove());
 
     // Para cada receita, criar um card
     receitas.forEach(receita => {
@@ -47,5 +52,34 @@ function exibirReceitas(receitas) {
     });
 }
 
+// Configurar Filtros
+function configurarFiltros() {
+    const filtros = document.querySelectorAll('.sidebar-filtros a');
+
+    filtros.forEach(filtro => {
+        filtro.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Remover ativo de todos
+            filtros.forEach(f => f.classList.remove('ativo'));
+
+            // Adicionar ativo ao clicado
+            filtro.classList.add('ativo');
+
+            // Carregar receitas com filtro
+            const categoria = filtro.textContent.includes('Tudo') ? '' :
+                             filtro.textContent.includes('Salgados') ? 'salgado' :
+                             filtro.textContent.includes('Doces') ? 'doce' :
+                             filtro.textContent.includes('Saudável') ? 'saudavel' :
+                             filtro.textContent.includes('Bebidas') ? 'bebida' : '';
+
+            carregarReceitas(categoria);
+        });
+    });
+}
+
 // Carregar quando a página carregar
-document.addEventListener('DOMContentLoaded', carregarReceitas);
+document.addEventListener('DOMContentLoaded', () => {
+    carregarReceitas();
+    configurarFiltros();
+});
