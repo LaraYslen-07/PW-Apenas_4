@@ -1132,6 +1132,8 @@ body.pagina-feed {
     flex: 1;
     display: flex;
     flex-direction: column;
+    position: relative;
+    padding-bottom: 80px; /* Espaço para o nome do autor */
 }
 
 .info-receita h3 {
@@ -1141,13 +1143,20 @@ body.pagina-feed {
 }
 
 .autor-receita {
-    margin: 0 0 15px 0;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    margin: 0;
     color: #888;
     font-size: 14px;
     font-style: italic;
     display: flex;
     align-items: center;
     gap: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .autor-receita i {
@@ -1163,9 +1172,55 @@ body.pagina-feed {
 
 .acoes-receita {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin-top: auto;
+    margin-bottom: 20px;
+}
+
+/* Ícones de editar e deletar no canto superior direito */
+.icones-card {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.icones-card button {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.icones-card button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.icones-card .btn-edit {
+    color: #007bff;
+}
+
+.icones-card .btn-edit:hover {
+    background: #e7f3ff;
+}
+
+.icones-card .btn-delete {
+    color: #dc3545;
+}
+
+.icones-card .btn-delete:hover {
+    background: #f8d7da;
 }
 
 .btn-like {
@@ -1255,7 +1310,7 @@ body.pagina-feed {
     z-index: 1000;
     left: 0;
     top: 0;
-    width: 1000%;
+    width: 1800%;
     height: 100%;
     background-color: #faf9f6; /* Branco off-white */
     overflow-y: auto;

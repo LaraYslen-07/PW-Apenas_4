@@ -86,6 +86,7 @@ function exibirReceitas(receitas, isMinhas = false) {
         const card = document.createElement('div');
         card.className = 'card-receita';
 
+        let iconesSuperioresHTML = '';
         let acoesHTML = `
             <button class="btn-like" data-id="${receita._id}">
                 <i class="fa-solid fa-heart"></i> <span class="likes-count">${receita.likes ? receita.likes.length : 0}</span>
@@ -93,18 +94,21 @@ function exibirReceitas(receitas, isMinhas = false) {
         `;
 
         if (isMinhas) {
-            acoesHTML += `
-                <button class="btn-edit" data-id="${receita._id}">
-                    <i class="fa-solid fa-edit"></i>
-                </button>
-                <button class="btn-delete" data-id="${receita._id}">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
+            iconesSuperioresHTML = `
+                <div class="icones-card">
+                    <button class="btn-edit" data-id="${receita._id}">
+                        <i class="fa-solid fa-edit"></i>
+                    </button>
+                    <button class="btn-delete" data-id="${receita._id}">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
             `;
         }
 
         card.innerHTML = `
             <img src="${receita.foto || 'images/placeholder.jpg'}" alt="${receita.titulo}" class="foto-receita">
+            ${iconesSuperioresHTML}
             <div class="info-receita">
                 <h3>${receita.titulo}</h3>
                 <p class="autor-receita"><i class="fa-solid fa-user"></i> Por: ${receita.usuario?.nome || 'Usuário'}</p>
