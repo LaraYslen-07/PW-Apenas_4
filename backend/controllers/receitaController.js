@@ -43,10 +43,21 @@ exports.listarReceitas = async (req, res) => {
         const filtro = {};
         if (usuario) filtro.usuario = usuario;
         if (categoria) filtro.categoria = categoria;
-        const receitas = await Receita.find(filtro).sort({ dataCriacao: -1 }); // Mais recentes primeiro
+        const receitas = await Receita.find(filtro).populate('usuario', 'nome').sort({ dataCriacao: -1 }); // Mais recentes primeiro
         res.status(200).json(receitas);
     } catch (error) {
         res.status(500).json({ erro: 'Erro ao buscar receitas.' });
+    }
+};
+
+// 2.1. Listar Receitas Curtidas por Usuário
+exports.listarReceitasCurtidas = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const receitas = await Receita.find({ likes: id }).populate('usuario', 'nome').sort({ dataCriacao: -1 });
+        res.status(200).json(receitas);
+    } catch (error) {
+        res.status(500).json({ erro: 'Erro ao buscar receitas curtidas.' });
     }
 };
 

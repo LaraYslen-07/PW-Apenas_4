@@ -107,6 +107,7 @@ function exibirReceitas(receitas, isMinhas = false) {
             <img src="${receita.foto || 'images/placeholder.jpg'}" alt="${receita.titulo}" class="foto-receita">
             <div class="info-receita">
                 <h3>${receita.titulo}</h3>
+                <p class="autor-receita"><i class="fa-solid fa-user"></i> Por: ${receita.usuario?.nome || 'Usuário'}</p>
                 <p>${receita.descricao}</p>
                 <div class="ingredientes">
                     <strong>Ingredientes:</strong> ${receita.ingredientes}
