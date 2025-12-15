@@ -6,7 +6,7 @@ exports.criarReceita = async (req, res) => {
         console.log("Dados recebidos:", req.body);
         console.log("Arquivo recebido:", req.file); // Aqui vem a foto do Cloudinary
 
-        const { titulo, ingredientes, modoPreparo, categoria } = req.body;
+        const { titulo, descricao, ingredientes, instrucoes, categoria } = req.body;
 
         // Se não veio foto, reclama
         if (!req.file) {
@@ -15,8 +15,9 @@ exports.criarReceita = async (req, res) => {
 
         const novaReceita = await Receita.create({
             titulo,
-            ingredientes, // O frontend tem que mandar isso como array
-            modoPreparo,
+            descricao,
+            ingredientes,
+            instrucoes,
             categoria,
             foto: req.file.path // URL direta do Cloudinary
         });
