@@ -11,7 +11,7 @@ const ReceitaSchema = new mongoose.Schema({
     },
     foto: { 
         type: String, // Vai guardar a URL do Cloudinary
-        required: [true, 'A foto é obrigatória']
+        required: false
     },
     ingredientes: {
         type: String, // Texto com os ingredientes
@@ -19,7 +19,7 @@ const ReceitaSchema = new mongoose.Schema({
     },
     instrucoes: { 
         type: String, 
-        required: [true, 'As instruções são obrigatórias']
+        required: false
     },
     etapas: [{
         equipamento: {

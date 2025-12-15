@@ -134,20 +134,37 @@ async function carregarReceitaParaEdicao() {
 document.getElementById('form-receita').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Criar FormData para enviar texto + arquivo
-    const formData = new FormData();
-    
+    // Verificar se todos os elementos existem
+    const tituloElement = document.getElementById('titulo');
+    const descricaoElement = document.getElementById('descricao');
+    const ingrediente1Element = document.getElementById('ingrediente1');
+    const ingrediente2Element = document.getElementById('ingrediente2');
+    const ingrediente3Element = document.getElementById('ingrediente3');
+    const ingrediente4Element = document.getElementById('ingrediente4');
+    const instrucoesElement = document.getElementById('instrucoes');
+
+    if (!tituloElement || !descricaoElement || !ingrediente1Element || !ingrediente2Element || !ingrediente3Element || !ingrediente4Element || !instrucoesElement) {
+        alert('Erro: Elementos do formulário não encontrados!');
+        console.error('Elementos não encontrados:', {
+            tituloElement, descricaoElement, ingrediente1Element, ingrediente2Element, 
+            ingrediente3Element, ingrediente4Element, instrucoesElement
+        });
+        return;
+    }
+
     // Pegar os valores dos campos
-    const titulo = document.getElementById('titulo').value;
-    const descricao = document.getElementById('descricao').value;
-    const ingrediente1 = document.getElementById('ingrediente1').value;
-    const ingrediente2 = document.getElementById('ingrediente2').value;
-    const ingrediente3 = document.getElementById('ingrediente3').value;
-    const ingrediente4 = document.getElementById('ingrediente4').value;
-    const instrucoes = document.getElementById('instrucoes').value;
-    const categoria = document.querySelector('input[name="categoria"]:checked');
+    const titulo = tituloElement.value;
+    const descricao = descricaoElement.value;
+    const ingrediente1 = ingrediente1Element.value;
+    const ingrediente2 = ingrediente2Element.value;
+    const ingrediente3 = ingrediente3Element.value;
+    const ingrediente4 = ingrediente4Element.value;
+    const instrucoes = instrucoesElement.value;
+    const categoriaElement = document.querySelector('input[name="categoria"]:checked');
+    const categoria = categoriaElement ? categoriaElement.value : null;
     const usuario = localStorage.getItem('usuario_id');
-    const foto = document.getElementById('foto-receita').files[0];
+    const fotoInput = document.getElementById('foto-receita');
+    const foto = fotoInput && fotoInput.files ? fotoInput.files[0] : null;
 
     // Validações básicas
     if (!titulo.trim()) {
@@ -160,7 +177,7 @@ document.getElementById('form-receita').addEventListener('submit', async (e) => 
         return;
     }
     
-    if (!categoria) {
+    if (!categoriaElement) {
         alert('Selecione uma categoria!');
         return;
     }
@@ -183,7 +200,7 @@ document.getElementById('form-receita').addEventListener('submit', async (e) => 
     formData.append('ingredientes', `${ingrediente1}, ${ingrediente2}, ${ingrediente3}, ${ingrediente4}`);
     formData.append('instrucoes', instrucoes);
     formData.append('etapas', JSON.stringify(etapasValidas));
-    formData.append('categoria', categoria.value);
+    formData.append('categoria', categoria);
     formData.append('usuario', usuario);
     
     if (foto) {
