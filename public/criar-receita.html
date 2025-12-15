@@ -46,7 +46,15 @@
                 <div class="input-group">
                     <label>Nome do Prato</label>
                     <div class="input-box">
-                        <input type="text" class="input-titulo" placeholder="Ex: Macarrão com Queijo" required>
+                        <input type="text" id="titulo" class="input-titulo" placeholder="Ex: Macarrão com Queijo" required>
+                    </div>
+                </div>
+
+                <!-- 2.5 DESCRIÇÃO -->
+                <div class="input-group">
+                    <label>Descrição</label>
+                    <div class="input-box">
+                        <input type="text" id="descricao" placeholder="Uma breve descrição da receita" required>
                     </div>
                 </div>
 
@@ -54,10 +62,10 @@
                 <div class="secao-ingredientes">
                     <h3><i class="fa-solid fa-basket-shopping"></i> Os 4 Ingredientes</h3>
                     <div class="grid-ingredientes">
-                        <input type="text" placeholder="1. Ingrediente Principal" required>
-                        <input type="text" placeholder="2. Segundo item" required>
-                        <input type="text" placeholder="3. Terceiro item" required>
-                        <input type="text" placeholder="4. Toque final" required>
+                        <input type="text" id="ingrediente1" placeholder="1. Ingrediente Principal" required>
+                        <input type="text" id="ingrediente2" placeholder="2. Segundo item" required>
+                        <input type="text" id="ingrediente3" placeholder="3. Terceiro item" required>
+                        <input type="text" id="ingrediente4" placeholder="4. Toque final" required>
                     </div>
                 </div>
 
@@ -65,7 +73,7 @@
                 <div class="input-group">
                     <label>Modo de Preparo</label>
                     <div class="input-box">
-                        <textarea rows="5" placeholder="Conte como faz essa mágica acontecer..."></textarea>
+                        <textarea id="instrucoes" rows="5" placeholder="Conte como faz essa mágica acontecer..."></textarea>
                     </div>
                 </div>
 

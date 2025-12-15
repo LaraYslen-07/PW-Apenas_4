@@ -33,15 +33,27 @@ document.getElementById('form-receita').addEventListener('submit', async (e) => 
     // Pegar os valores dos campos
     const titulo = document.getElementById('titulo').value;
     const descricao = document.getElementById('descricao').value;
-    const ingredientes = document.getElementById('ingredientes').value;
+    const ingrediente1 = document.getElementById('ingrediente1').value;
+    const ingrediente2 = document.getElementById('ingrediente2').value;
+    const ingrediente3 = document.getElementById('ingrediente3').value;
+    const ingrediente4 = document.getElementById('ingrediente4').value;
     const instrucoes = document.getElementById('instrucoes').value;
+    const categoria = document.querySelector('input[name="categoria"]:checked').value;
+    const usuario = localStorage.getItem('usuario_id');
     const foto = document.getElementById('foto-receita').files[0];
 
-    // Colocar tudo no pacote
+    if (!usuario) {
+        alert('Você precisa estar logado para criar uma receita.');
+        window.location.href = 'login.html';
+        return;
+    }
+
     formData.append('titulo', titulo);
     formData.append('descricao', descricao);
-    formData.append('ingredientes', ingredientes);
+    formData.append('ingredientes', `${ingrediente1}, ${ingrediente2}, ${ingrediente3}, ${ingrediente4}`);
     formData.append('instrucoes', instrucoes);
+    formData.append('categoria', categoria);
+    formData.append('usuario', usuario);
     
     if (foto) {
         formData.append('foto', foto);

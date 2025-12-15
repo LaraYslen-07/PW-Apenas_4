@@ -26,6 +26,11 @@ const ReceitaSchema = new mongoose.Schema({
         enum: ['salgado', 'doce', 'saudavel', 'bebida'],
         default: 'salgado'
     },
+    usuario: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Usuario',
+        required: true
+    },
     dataCriacao: {
         type: Date,
         default: Date.now

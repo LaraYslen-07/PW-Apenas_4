@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Apenas 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="pagina-feed">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Apenas 4 🍳</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="feed.html" class="nav-link">Feed</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="criar-receita.html" class="btn-adicionar-receita">
+                    <i class="fa-solid fa-plus"></i> Nova Receita
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="mesa-container">
+        <section class="perfil-container">
+            <div class="perfil-header">
+                <img id="foto-perfil" src="" alt="Foto de Perfil" class="foto-perfil-grande">
+                <div class="info-perfil">
+                    <h1 id="nome-usuario"></h1>
+                    <p id="bio-usuario"></p>
+                    <p id="email-usuario"></p>
+                </div>
+            </div>
+
+            <div class="receitas-perfil">
+                <h2>Minhas Receitas</h2>
+                <div id="grid-receitas" class="feed-grid">
+                    <!-- Receitas serão carregadas aqui -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="javascripts/perfil.js"></script>
+</body>
+</html>

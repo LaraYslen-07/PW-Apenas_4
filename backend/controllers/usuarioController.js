@@ -24,13 +24,25 @@ exports.criarUsuario = async (req, res) => {
     }
 };
 
-// 2. Listar Usuarios (GET)
-exports.listarUsuarios = async (req, res) => {
+// 3. Obter Usuário por ID (GET)
+exports.obterUsuario = async (req, res) => {
     try {
-        const usuarios = await Usuario.find().sort({ dataCriacao: -1 });
-        res.status(200).json(usuarios);
+        const { id } = req.params;
+        const usuario = await Usuario.findById(id);
+
+        if (!usuario) {
+            return res.status(404).json({ erro: 'Usuário não encontrado.' });
+        }
+
+        res.status(200).json({
+            _id: usuario._id,
+            nome: usuario.nome,
+            email: usuario.email,
+            bio: usuario.bio,
+            foto: usuario.fotoPerfil
+        });
     } catch (error) {
-        res.status(500).json({ erro: 'Erro ao buscar usuarios.' });
+        res.status(500).json({ erro: 'Erro ao buscar usuário.' });
     }
 };
 // ... (código anterior de criarUsuario) ...
