@@ -1521,3 +1521,114 @@ body.pagina-feed {
     color: #5d4037;
     font-weight: 600;
 }
+/* --- ESTILOS DO RODAPÉ --- */
+
+.footer {
+    background-color: #2c2c2c; /* Cinza escuro/carvão */
+    color: #e0e0e0;
+    padding: 50px 0 20px 0;
+    margin-top: 60px; /* Espaço para separar do caderno */
+    position: relative;
+    z-index: 10;
+}
+
+.footer-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.footer-section {
+    flex: 1;
+    margin-bottom: 20px;
+    min-width: 250px;
+}
+
+/* Estilo da Marca no Rodapé */
+.logo-footer {
+    font-family: 'Cookie', cursive;
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.footer-section p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #bbb;
+}
+
+/* Estilo dos Links */
+.footer-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #ff9f43; /* Cor laranja destaque ao passar o mouse */
+    padding-left: 5px; /* Efeitinho de movimento */
+}
+
+/* Ícones Sociais */
+.social-icons a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #444;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: background 0.3s, transform 0.3s;
+    font-size: 1.1rem;
+}
+
+.social-icons a:hover {
+    background-color: #ff9f43; /* Laranja */
+    transform: translateY(-3px);
+}
+
+/* Parte inferior (Copyright) */
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Responsividade para celular */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: center;
+    }
+}
