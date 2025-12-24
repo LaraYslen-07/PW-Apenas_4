@@ -175,21 +175,25 @@
 
 
 body {
-    background-size: cover; /* Cobre a tela toda */
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* O fundo fica parado enquanto o site rola */
-    /* Gradiente suave de azul para roxo, bem moderno */
+    background-attachment: fixed;
     background: linear-gradient(135deg, #84ccc1 0%, #4ba29b 100%);
-     background-image: url('../images/fundocinza.png');
+    background-image: url('../images/fundocinza.png');
+    
     padding: 40px;
     padding-top: 100px;
     font-family: "Segoe UI", sans-serif;
     min-height: 100vh;
+
+    /* AQUI ESTÁ A CORREÇÃO PRINCIPAL: */
     display: flex;
-    align-items: center;
-    justify-content: center; /* Centraliza o caderno na tela */
+    flex-direction: column; /* Isso obriga os itens a ficarem um embaixo do outro */
+    align-items: center;    /* Centraliza o caderno horizontalmente */
+    justify-content: flex-start; /* Começa do topo (evita bugs de corte em telas pequenas) */
 }
+
 
 .caderno {
     position: relative;
@@ -1524,12 +1528,15 @@ body.pagina-feed {
 /* --- ESTILOS DO RODAPÉ --- */
 
 .footer {
-    background-color: #2c2c2c; /* Cinza escuro/carvão */
+    background-color: #2c2c2c;
     color: #e0e0e0;
     padding: 50px 0 20px 0;
-    margin-top: 60px; /* Espaço para separar do caderno */
+    margin-top: 60px;
     position: relative;
     z-index: 10;
+    
+    /* ADICIONE ESTA LINHA: */
+    width: 100%; /* Garante que a barra vá de ponta a ponta da tela */
 }
 
 .footer-content {
@@ -1630,5 +1637,120 @@ body.pagina-feed {
     .social-icons {
         display: flex;
         justify-content: center;
+    }
+}
+/* --- PÁGINA SOBRE --- */
+.sobre-container {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin: 30px 0;
+    text-align: left;
+}
+
+.sobre-texto {
+    flex: 2;
+}
+
+.sobre-texto h3 {
+    font-family: 'Cookie', cursive;
+    font-size: 2rem;
+    color: #ff9f43; /* Laranja da marca */
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.sobre-texto p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.sobre-imagem {
+    flex: 1;
+    text-align: center;
+    border: 3px dashed #e0d0b0; /* Borda estilo "recorte" */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* --- PÁGINA CONTATO --- */
+.contato-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.texto-intro {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.form-contato {
+    background-color: #fff;
+    /* Opcional: se quiser destacar o form do fundo do papel, mas no papel fica melhor limpo */
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+/* Estilo dos inputs parecendo linha de caderno ou caixa moderna */
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit; /* Herda a fonte do site */
+    transition: border-color 0.3s;
+    background-color: #fcfcfc;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    border-color: #ff9f43;
+    outline: none;
+    background-color: #fff;
+}
+
+/* Botão largura total para o form */
+.btn-full {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.contato-infos {
+    margin-top: 40px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px dashed #ccc;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    color: #777;
+}
+
+.cta-center {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Responsividade para o Sobre */
+@media (max-width: 768px) {
+    .sobre-container {
+        flex-direction: column-reverse; /* Imagem em cima no celular */
     }
 }
