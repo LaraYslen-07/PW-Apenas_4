@@ -180,7 +180,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background: linear-gradient(135deg, #84ccc1 0%, #4ba29b 100%);
-    background-image: url('../images/fundocinza.png');
+    background-image: url('../images/tableChristmas.jpg');
     
     padding: 40px;
     padding-top: 100px;
@@ -1528,7 +1528,7 @@ body.pagina-feed {
 /* --- ESTILOS DO RODAPÉ --- */
 
 .footer {
-    background-color: #be7c7c;
+    background-color: #116126;
     color: #757474;
     padding: 50px 0 20px 0;
     margin-top: 60px;
