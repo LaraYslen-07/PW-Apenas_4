@@ -1,28 +1,113 @@
-<!-- DENTRO DA .folha -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - Apenas 4</title>
+    
+    <!-- Fonte Lettering -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    
+    <!-- CSS (No lugar certo) -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+    
+    <!-- Ícones -->
+         <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<div class="hero-titulo">
-    <h1>Sobre o Chef</h1>
-    <img src="images/chapeu.png" class="icone-flutuante chapeu" alt="Chapéu">
-</div>
+</head>
+<body>
 
-<div class="sobre-container">
-    <div class="sobre-texto">
-        <h3>Por que apenas 4?</h3>
-        <p>A vida já é complicada demais, a cozinha não precisa ser. O projeto <strong>Apenas 4</strong> nasceu da necessidade de estudantes, jovens adultos e amantes da culinária que querem sabor sem gastar horas no mercado ou na frente do fogão.</p>
+    <!-- 1. BARRA DE NAVEGAÇÃO -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Apenas 4 🍳</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Início</a></li>
+                <li class="nav-item"><a href="feed.html" class="nav-link">Receitas</a></li>
+                <li class="nav-item"><a href="sobre.html" class="nav-link">Sobre</a></li>
+                <li class="nav-item"><a href="contato.html" class="nav-link">Contato</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="login.html" class="btn-entrar">Entrar</a>
+                <a href="cadastro.html" class="btn-cadastrar">Cadastrar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. CADERNO (CONTEÚDO PRINCIPAL) -->
+    <div class="caderno">
         
-        <p>Nossa missão é provar que a criatividade floresce na limitação. Com apenas quatro ingredientes principais, trazemos receitas de doces, salgados e drinks que vão surpreender você.</p>
+        <!-- Lado Esquerdo: Espiral -->
+        <div class="espiral"></div>
 
-        <h3>Quem desenvolve?</h3>
-        <p>Olá! Eu sou um desenvolvedor Full-stack apaixonado por tecnologia e um bom pudim. Este projeto une meus estudos em Web Development com a vontade de facilitar a vida na cozinha.</p>
-    </div>
+        <!-- Lado Direito: Folha de Papel -->
+        <!-- AQUI COMEÇA A FOLHA -->
+        <div class="folha">
+            
+            <!-- --- CONTEÚDO DA PÁGINA SOBRE --- -->
+            
+            <div class="hero-titulo">
+                <h1>Sobre o Chef</h1>
+                <!-- Ícone de chapéu flutuando -->
+                <img src="images/chapeu.png" class="icone-flutuante chapeu" alt="Chapéu" style="width: 100px;">
+            </div>
 
-    <!-- Se quiser colocar uma foto sua ou uma ilustração -->
-    <div class="sobre-imagem">
-        <i class="fas fa-user-astronaut" style="font-size: 8rem; color: #ccc;"></i>
-        <!-- <img src="images/sua-foto.jpg" alt="Foto do Criador"> -->
-    </div>
-</div>
+            <div class="sobre-container">
+                <div class="sobre-texto">
+                    <h3>Por que apenas 4?</h3>
+                    <p>A intenção da criação desse site além de entregar algo legal para disciplina, foi criar um espaço legal para mim e minhas amigas. 
+                    
+                
 
-<div class="cta-center">
-    <a href="feed.html" class="botao-entrar">Ver Receitas</a>
-</div>
+                    <h3>Principais dificuldades?</h3>
+                    <p>O projeto <strong>Apenas 4</strong> me fez aprender bastante precisei assistir muitas aulas.</p>
+                <p>Muitas estruturas e conceitos novos peguei de vídeos de indianos e outros para aprender e confesso que muitas coisas peguei dos vídeos que assisti e não criei por conta própria.</p>
+                </div>
+
+                
+            </div>
+
+            <div class="cta-center">
+                <a href="feed.html" class="botao-entrar">Ver Receitas</a>
+            </div>
+
+            <!-- --- FIM DO CONTEÚDO --- -->
+
+        </div> <!-- AQUI TERMINA A FOLHA -->
+    
+    </div> <!-- Fim do Caderno -->
+
+    <!-- 3. RODAPÉ -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section brand">
+                <h2 class="logo-footer">Apenas 4 🍳</h2>
+                <p>Cozinhar não precisa ser complicado.</p>
+            </div>
+            <div class="footer-section links">
+                <h3>Acesso Rápido</h3>
+                <ul>
+                    <li><a href="/">Início</a></li>
+                    <li><a href="feed.html">Receitas</a></li>
+                    <li><a href="login.html">Entrar</a></li>
+                    <li><a href="cadastro.html">Cadastrar</a></li>
+                </ul>
+            </div>
+            <div class="footer-section social">
+                <h3>Siga-nos</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Apenas 4. Feito com fome e código.</p>
+        </div>
+    </footer>
+
+    <script src="javascripts/script.js"></script>
+</body>
+</html>

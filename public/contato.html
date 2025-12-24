@@ -1,35 +1,118 @@
-<!-- DENTRO DA .folha -->
-
-<div class="hero-titulo">
-    <h1>Fale Conosco</h1>
-    <!-- Ícone de carta/mensagem -->
-    <i class="fas fa-envelope-open-text icone-flutuante" style="font-size: 3rem; color: #ff9f43;"></i>
-</div>
-
-<div class="contato-container">
-    <p class="texto-intro">Tem uma receita incrível de 4 ingredientes? Ou encontrou um bug no site? Mande uma mensagem pra gente!</p>
-
-    <form class="form-contato" action="#" method="POST">
-        <div class="input-group">
-            <label for="nome">Seu Nome</label>
-            <input type="text" id="nome" name="nome" placeholder="Ex: Mestre Cuca" required>
-        </div>
-
-        <div class="input-group">
-            <label for="email">Seu E-mail</label>
-            <input type="email" id="email" name="email" placeholder="exemplo@email.com" required>
-        </div>
-
-        <div class="input-group">
-            <label for="mensagem">Sua Mensagem</label>
-            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva aqui sua sugestão ou dúvida..." required></textarea>
-        </div>
-
-        <button type="submit" class="botao-entrar btn-full">Enviar Mensagem</button>
-    </form>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Apenas 4</title>
     
-    <div class="contato-infos">
-        <p><i class="fab fa-whatsapp"></i> (85) 99999-9999</p>
-        <p><i class="fas fa-map-marker-alt"></i> Fortaleza, CE</p>
-    </div>
-</div>
+    <!-- Fonte Lettering -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    
+    <!-- CSS (O LUGAR CERTO É AQUI) -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+    
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- 1. BARRA DE NAVEGAÇÃO -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Apenas 4 🍳</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Início</a></li>
+                <li class="nav-item"><a href="feed.html" class="nav-link">Receitas</a></li>
+                <li class="nav-item"><a href="sobre.html" class="nav-link">Sobre</a></li>
+                <li class="nav-item"><a href="contato.html" class="nav-link">Contato</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="login.html" class="btn-entrar">Entrar</a>
+                <a href="cadastro.html" class="btn-cadastrar">Cadastrar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. CADERNO (CONTEÚDO PRINCIPAL) -->
+    <div class="caderno">
+        
+        <!-- Lado Esquerdo: Espiral -->
+        <div class="espiral"></div>
+
+        <!-- Lado Direito: Folha de Papel -->
+        <!-- AQUI COMEÇA A FOLHA -->
+        <div class="folha">
+            
+            <!-- SEU CONTEÚDO COMEÇA AQUI -->
+            <div class="hero-titulo">
+                <h1>Fale Conosco</h1>
+                <!-- Ícone de carta/mensagem -->
+                <i class="fas fa-envelope-open-text icone-flutuante" style="font-size: 3rem; color: #ff9f43;"></i>
+            </div>
+
+            <div class="contato-container">
+                <p class="texto-intro">Tem uma receita incrível de 4 ingredientes? Ou encontrou um bug no site? Mande uma mensagem pra gente!</p>
+
+                <form class="form-contato" action="#" method="POST">
+                    <div class="input-group">
+                        <label for="nome">Seu Nome</label>
+                        <input type="text" id="nome" name="nome" placeholder="Ex: Mestre Cuca" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email">Seu E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="exemplo@email.com" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="mensagem">Sua Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="5" placeholder="Escreva aqui sua sugestão ou dúvida..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="botao-entrar btn-full">Enviar Mensagem</button>
+                </form>
+                
+                <div class="contato-infos">
+                    <p><i class="fab fa-whatsapp"></i> (85) 99999-9999</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Fortaleza, CE</p>
+                </div>
+            </div>
+            <!-- SEU CONTEÚDO TERMINA AQUI -->
+
+        </div> <!-- AQUI TERMINA A FOLHA -->
+    
+    </div> <!-- Fim do Caderno -->
+
+    <!-- 3. RODAPÉ -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section brand">
+                <h2 class="logo-footer">Apenas 4 🍳</h2>
+                <p>Cozinhar não precisa ser complicado.</p>
+            </div>
+            <div class="footer-section links">
+                <h3>Acesso Rápido</h3>
+                <ul>
+                    <li><a href="/">Início</a></li>
+                    <li><a href="feed.html">Receitas</a></li>
+                    <li><a href="login.html">Entrar</a></li>
+                    <li><a href="cadastro.html">Cadastrar</a></li>
+                </ul>
+            </div>
+            <div class="footer-section social">
+                <h3>Siga-nos</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Apenas 4. Feito com fome e código.</p>
+        </div>
+    </footer>
+
+    <script src="javascripts/script.js"></script>
+</body>
+</html>
